@@ -1,0 +1,194 @@
+version 1.0
+
+Funktionen:
+	
+1.	draw(layer,1byte,2byte,3byte,4byte,5byte,6byte,7byte,8byte);		//byte
+2.	time(time);															//int
+	
+info:
+
+Funktion	
+   \/
+1.	--> Zeichnet auf die entsprechnede Ebene die Dahtenwerte
+2. 	--> Setzt die Zeit wie lange ein Frame gezeigt wird
+
+
+-----------------------------------------------------------------------
+
+	
+version 2.0
+	
+1.	draw(layer,1byte,2byte,3byte,4byte,5byte,6byte,7byte,8byte);		//byte
+2.	drawLayer(layer);													//byte
+3.	drawWall(wall);														//byte
+4.	drawWall90(wall);													//byte
+5.	drawCube("64*bytes");												//byte
+6.	time(time);															//int
+	
+	
+Funktion	
+   \/
+1.	--> Zeichnet auf die entsprechnede Ebene die Dahtenwerte
+2.	--> Zeichnet eine von 8 Ebenen komplett
+3.	--> Zeichnet eine von 8 Wänden komplett
+4.  --> Zeichnet eine von 8 Wänden um 90* gedreht komplett
+5.	--> Zeichnet eine individuelle 3D Figur auf den gesamten Würfel
+6. 	--> Setzt die Zeit wie lange ein Frame gezeigt wird	
+
+
+-----------------------------------------------------------------------
+
+	
+version 2.1
+	
+1.	draw(layer,1byte,2byte,3byte,4byte,5byte,6byte,7byte,8byte);		//byte
+2.	drawLayer(layer);													//byte
+3.	drawWall(wall);														//byte
+4.	drawWall90(wall);													//byte
+5.	drawCube("64*bytes");												//byte
+6.	time(time);															//int
+7.	shiftLayerR("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)	
+8.	shiftCubeR("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+	
+Funktion	
+   \/
+1.	--> Zeichnet auf die entsprechnede Ebene die Dahtenwerte
+2.	--> Zeichnet eine von 8 Ebenen komplett
+3.	--> Zeichnet eine von 8 Wänden komplett
+4.  --> Zeichnet eine von 8 Wänden um 90* gedreht komplett
+5.	--> Zeichnet eine individuelle 3D Figur auf den gesamten Würfel
+6. 	--> Setzt die Zeit wie lange ein Frame gezeigt wird		
+7.	--> Shiftet und setzt die Fläche um 1 nach rechts	
+
+
+-----------------------------------------------------------------------
+
+	
+version 2.1.2
+	
+1.	draw(layer,1byte,2byte,3byte,4byte,5byte,6byte,7byte,8byte);		//byte
+2.	drawLayer(layer);													//byte
+3.	drawWall(wall);														//byte
+4.	drawWall90(wall);													//byte
+5.	drawCube("64*bytes");												//byte
+6.	time(time);															//int
+7.	shiftLayerR("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)	
+8.	shiftCubeR("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+9.	light("wie hell in %")												//byte
+	
+Funktion	
+   \/
+1.	--> Zeichnet auf die entsprechnede Ebene die Dahtenwerte
+2.	--> Zeichnet eine von 8 Ebenen komplett
+3.	--> Zeichnet eine von 8 Wänden komplett
+4.  --> Zeichnet eine von 8 Wänden um 90* gedreht komplett
+5.	--> Zeichnet eine individuelle 3D Figur auf den gesamten Würfel
+6. 	--> Setzt die Zeit wie lange ein Frame gezeigt wird		
+7.	--> Shiftet und setzt die Fläche um 1 nach rechts
+8.	--> Shiftet und setzt den ganzen Würfel um 1 nach rechts
+9.	--> Setzt die Helligkeit des Würfels	
+	
+-----------------------------------------------------------------------
+
+	
+version 2.2.0
+
+NEU:
+Neue Funktionen
+	
+1.	draw(layer,1byte,2byte,3byte,4byte,5byte,6byte,7byte,8byte);		//byte
+2.	drawLayer(layer);													//byte
+3.	drawWall(wall);														//byte
+4.	drawWall90(wall);													//byte
+5.	drawCube("64*bytes");												//byte
+6.	time(time);															//int
+7.	shiftLayerR("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)	
+8.	shiftCubeR("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+9.	light("wie hell in %")												//byte
+10.	rain(wie lange)														//byte
+11.	writeLayer("text","!!Länge des Textes!!",ebene)						//char,byte
+12.	shiftLayerL("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)
+13.	shiftCubeL("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+14.	shiftLayerR90("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)
+15.	shiftLayerL90("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)
+16.	shiftCubeR90("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+17.	shiftCubeL90("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+
+
+	
+Funktion	
+   \/
+1.	--> Zeichnet auf die entsprechnede Ebene die Dahtenwerte
+2.	--> Zeichnet eine von 8 Ebenen komplett
+3.	--> Zeichnet eine von 8 Wänden komplett
+4.  --> Zeichnet eine von 8 Wänden um 90* gedreht komplett
+5.	--> Zeichnet eine individuelle 3D Figur auf den gesamten Würfel
+6. 	--> Setzt die Zeit wie lange ein Frame gezeigt wird		
+7.	--> Shiftet und setzt die Fläche um 1 nach rechts
+8.	--> Shiftet und setzt den ganzen Würfel um 1 nach rechts
+9.	--> Setzt die Helligkeit des Würfels
+10. --> Erzeugt random Regen der von oben nach unten tropft				-- wird noch verbessert
+11. --> Schreibt einen Text auf eine Ebene								-- wird noch verbessert
+12.	--> Shiftet und setzt die Fläche um 1 nach links
+13.	-->	Shiftet und setzt den ganzen Würfel um 1 nach links
+14.	--> Shiftet und setzt die Fläche um 1 und um 90 grad im Uhrzeigersinn nach rechts
+15.	--> Shiftet und setzt die Fläche um 1 und um 90 grad im Uhrzeigersinn nach links
+16.	--> Shiftet und setzt den ganzen Würfel um 1 und um 90 grad im Uhrzeigersinn nach rechts
+17.	--> Shiftet und setzt den ganzen Würfel um 1 und um 90 grad im Uhrzeigersinn nach links
+	
+	
+-----------------------------------------------------------------------
+
+	
+version 2.2.1
+
+NEU:
+Funktion rain() wurde verbessert und benötigt nun 2 Parameter.
+
+
+
+	
+1.	draw(layer,1byte,2byte,3byte,4byte,5byte,6byte,7byte,8byte);		//byte
+2.	drawLayer(layer);													//byte
+3.	drawWall(wall);														//byte
+4.	drawWall90(wall);													//byte
+5.	drawCube("64*bytes");												//byte
+6.	time(time);															//int
+7.	shiftLayerR("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)	
+8.	shiftCubeR("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+9.	light("wie hell in %")												//byte
+10.	rain(wie lange,wie stark von 1-100)														//byte
+11.	writeLayer("text","!!Länge des Textes!!",ebene)						//char,byte
+12.	shiftLayerL("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)
+13.	shiftCubeL("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+14.	shiftLayerR90("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)
+15.	shiftLayerL90("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)
+16.	shiftCubeR90("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+17.	shiftCubeL90("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+
+
+	
+Funktion	
+   \/
+1.	--> Zeichnet auf die entsprechnede Ebene die Dahtenwerte
+2.	--> Zeichnet eine von 8 Ebenen komplett
+3.	--> Zeichnet eine von 8 Wänden komplett
+4.  --> Zeichnet eine von 8 Wänden um 90* gedreht komplett
+5.	--> Zeichnet eine individuelle 3D Figur auf den gesamten Würfel
+6. 	--> Setzt die Zeit wie lange ein Frame gezeigt wird		
+7.	--> Shiftet und setzt die Fläche um 1 nach rechts
+8.	--> Shiftet und setzt den ganzen Würfel um 1 nach rechts
+9.	--> Setzt die Helligkeit des Würfels
+10. --> Erzeugt random Regen mit gesetzter Stärke, der von oben nach unten tropft				-- wird noch verbessert
+11. --> Schreibt einen Text auf eine Ebene								-- wird noch verbessert
+12.	--> Shiftet und setzt die Fläche um 1 nach links
+13.	-->	Shiftet und setzt den ganzen Würfel um 1 nach links
+14.	--> Shiftet und setzt die Fläche um 1 und um 90 grad im Uhrzeigersinn nach rechts
+15.	--> Shiftet und setzt die Fläche um 1 und um 90 grad im Uhrzeigersinn nach links
+16.	--> Shiftet und setzt den ganzen Würfel um 1 und um 90 grad im Uhrzeigersinn nach rechts
+17.	--> Shiftet und setzt den ganzen Würfel um 1 und um 90 grad im Uhrzeigersinn nach links
+	
+	
+	
+	
+	

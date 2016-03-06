@@ -4,7 +4,7 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
-Intervalometer intervalometer(5,2,3,7,6,4,activeHigh,9,8,10,A0);
+Intervalometer intervalometer(5,2,3,7,6,4,activeHigh,9,11,8,10,A0);
 
 void setup() 
 {
@@ -49,4 +49,3 @@ void BACK()
 {
   intervalometer.handleBackButton();
 }
-

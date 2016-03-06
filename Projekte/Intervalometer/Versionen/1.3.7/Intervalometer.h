@@ -1,9 +1,9 @@
 
 /*Intervalometer
 Author 			: Alex Krieg
-Version			: 2.0.1
+Version			: 1.3.6	
 compatibility 	: Hardware 1.0.0
-Date			: 6.3.2016
+Date			: 4.3.2016
 
 copyright by BlenderEr Informatics®
 All rights reserved
@@ -24,37 +24,35 @@ All rights reserved
 
 enum modes 
 	{ 
-	IntervalMode				= 1,
-		IntervalSetzen		= 1, 
+		IntervalSetzen		= 0, 
+		HelligkeitSetzen	= 1, 
 		AufnahmezeitSetzen	= 2, 
 		KontrolleInterval	= 3, 
 		IntervalRun			= 4,
 		AbschlussInfoInterval= 5,
+		Hauptmenue			= 6,
+		ToleranzSetzen		= 7,
+		TaktSetzen			= 8,
+		KontrolleBlitz		= 9,
+		BlitzRun			= 10,
+		AbschlussinfoBlitz	= 11,
+		countdown			= 12,
 		
-	HelligkeitSetzenMode		= 2, 
+		PushToShoot			= 13,
 		
-	BlitzMode					= 3,	
-		ToleranzSetzen		= 1,
-		TaktSetzen			= 2,
-		KontrolleBlitz		= 3,
-		BlitzRun			= 4,
-		AbschlussinfoBlitz	= 5,
 		
-	countdown					= 4,
-		
-	PushToShootMode				= 5,
-		
-	ZeitAusloeserMode			= 6,
+		ZeitAusloeser		= 14,
 		ZeitAusloeserSetup	= 1,
 		ZeitAusloeserRun	= 2,
-	Hauptmenue					= 7,	
+		
 		HauptmenueAuswahl_1	= 1,
 		HauptmenueAuswahl_2	= 2,
 		HauptmenueAuswahl_3	= 3,
 		HauptmenueAuswahl_4	= 4,
 		HauptmenueAuswahl_5	= 5,
 		
-	SerienAufnahmeMode			= 8,
+		
+		SerienAufnahme		= 15,
 		SerieSetAmount		= 1,
 		SerieSetInterval	= 2,
 		SerieRun			= 3
@@ -140,7 +138,7 @@ class Intervalometer
 			bool 				fastStart;	//wenn true --> überspringt den countdown
 					
 			short 				mode;
-			
+			short 				MenueMode;
 			
 			
 			
@@ -153,9 +151,9 @@ class Intervalometer
 			int 				minuten;                                                          
 			unsigned long 		images;
 	
-			unsigned long 		lastTime;				//In Sekunden		-->		Kann bis zu 24 Stunden --> 86400 Sekunden gehen
+			long 				lastTime;				//In Sekunden		-->		Kann bis zu 24 Stunden --> 86400 Sekunden gehen
 			int 				lastMode;
-			//float 				lastIntervall;			//In 10/Sekunden		-->		Kann bis zu 10 Minuten --> 6000 10/Sekunden gehen
+			float 				lastIntervall;			//In 10/Sekunden		-->		Kann bis zu 10 Minuten --> 6000 10/Sekunden gehen
 			
 			unsigned long 		currentMillis; 
 			unsigned long 		previousMillis;
@@ -163,23 +161,12 @@ class Intervalometer
 			unsigned long 		referenceTime;
 
 			const int 			scrollTimer = 500;		//In Ms
-	//--------------Menue-------------------\\
-
-			short 				MenueMode;
-			short				lastMenueMode;
 			
-	//---------------interval----------------\\
-
-			float 				lastIntervall;			//In 10/Sekunden		-->		Kann bis zu 10 Minuten --> 6000 10/Sekunden gehen
 			
-			int unterModeInterval;
-			int lastUnterModeInterval;
-			bool setFocus;
+			
+			
 			
 	//------------------BLITZ-----------------\\
-			
-			int unterModeBlitz;
-			int lastUnterModeBlitz;
 			
 			int toleranz;
 			int takt;
@@ -194,17 +181,15 @@ class Intervalometer
 	
 	//----------------ZeitAusloeser------------\\
 	
-			int unterModeZeitAusloeser;			//Untermodus 
-			int lastUnterModeZeitAusloeser;
-			
+			int lastZeitAusloeserMode;
+			int ZeitAusloeserMode;	//Untermodus 
 			unsigned long timeToShoot;		//Time in ms
 			bool timeIsRunning;
 			
 	//---------------SerienAufnahme-----------------\\
 
-			int unterModeSerienAufnahme;
-			int lastUnterModeSerienAufnahme;
-			
+			int SerienAufnahmeMode;
+			int lastSerienAufnahmeMode;
 			unsigned int SerieInterval;
 			unsigned int SeriePictures;
 			bool deactivate;

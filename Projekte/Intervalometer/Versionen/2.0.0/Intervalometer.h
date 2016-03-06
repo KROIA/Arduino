@@ -1,9 +1,9 @@
 
 /*Intervalometer
 Author 			: Alex Krieg
-Version			: 2.0.1
+Version			: 2.0.0
 compatibility 	: Hardware 1.0.0
-Date			: 6.3.2016
+Date			: 5.3.2016
 
 copyright by BlenderEr Informatics®
 All rights reserved
@@ -153,7 +153,7 @@ class Intervalometer
 			int 				minuten;                                                          
 			unsigned long 		images;
 	
-			unsigned long 		lastTime;				//In Sekunden		-->		Kann bis zu 24 Stunden --> 86400 Sekunden gehen
+			long 				lastTime;				//In Sekunden		-->		Kann bis zu 24 Stunden --> 86400 Sekunden gehen
 			int 				lastMode;
 			//float 				lastIntervall;			//In 10/Sekunden		-->		Kann bis zu 10 Minuten --> 6000 10/Sekunden gehen
 			
@@ -174,7 +174,6 @@ class Intervalometer
 			
 			int unterModeInterval;
 			int lastUnterModeInterval;
-			bool setFocus;
 			
 	//------------------BLITZ-----------------\\
 			

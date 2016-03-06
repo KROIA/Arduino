@@ -1,9 +1,9 @@
 
 /*Intervalometer
 Author 			: Alex Krieg
-Version			: 2.0.1		
-compatibility 	: Hardware 1.0.0s
-Date			: 6.3.2016
+Version			: 2.0.0		
+compatibility 	: Hardware 1.0.0
+Date			: 5.3.2016
 
 copyright by BlenderEr Informatics®
 All rights reserved
@@ -47,7 +47,6 @@ All rights reserved
 	
 	
 	light 			= 0;
-	setFocus		= true;
 	SerienAufnahmeIsRunning = false;
 	timeIsRunning	= false;
 	displayStat		= true;
@@ -154,9 +153,9 @@ void Intervalometer::run()
 					{
 						// Anzeige Display aktualisieren
 						
-						stunden                  = lastTime / 3600 %60;
-						minuten                  = lastTime / 60 % 60 ;
-						Serial.println(lastTime);
+						stunden                  = lastTime / 3600;
+						minuten                  = lastTime / 60;
+						
 						p_lcd                    ->setCursor  (0, 0);
 						p_lcd                    ->print      ("Aufnahmezeit:           ");
 						p_lcd                    ->setCursor  (0, 1);
@@ -210,21 +209,16 @@ void Intervalometer::run()
 							mode = AbschlussInfoInterval;
 							stopRunning();
 						}
-						if(currentMillis - previousMillis > (lastIntervall*100)-200 && setFocus == true)
+						if(currentMillis - previousMillis2 > (lastIntervall*100)-100)
 						{
-							setFocus = false;
-							//previousMillis2 =  currentMillis;
-							Serial.println("focusON");
+							previousMillis2 =  currentMillis;
 							digitalWrite(focusPin,HIGH);		//focusPin
 						}
 						if(currentMillis - previousMillis > lastIntervall*100)
 						{
-							setFocus = true;
 							previousMillis =  currentMillis;
-							Serial.println("shoot");
 							shoot();
 							digitalWrite(focusPin,LOW);		//focusPin
-							Serial.println("focusOFF");
 						}
 					break;
 					}
@@ -1002,7 +996,6 @@ void Intervalometer::handleOkButton()
 				{
 					//lastMode = mode;
 					mode = Hauptmenue;
-					unterModeInterval = IntervalSetzen;
 					reset();
 				break;
 				}
@@ -1407,7 +1400,6 @@ void Intervalometer::stopRunning()
 void Intervalometer::reset()
 {
 	//light 			= 0;
-	setFocus		= true;
 	mode 			= Hauptmenue;
 	//MenueMode		= HauptmenueAuswahl_1;
 	unterModeZeitAusloeser=ZeitAusloeserSetup;

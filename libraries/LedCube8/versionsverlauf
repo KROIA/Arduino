@@ -1,0 +1,379 @@
+version 1.0
+
+Funktionen:
+	
+1.	draw(layer,1byte,2byte,3byte,4byte,5byte,6byte,7byte,8byte);		//byte
+2.	time(time);															//int
+	
+info:
+
+Funktion	
+   \/
+1.	--> Zeichnet auf die entsprechnede Ebene die Dahtenwerte
+2. 	--> Setzt die Zeit wie lange ein Frame gezeigt wird
+
+
+-----------------------------------------------------------------------
+
+	
+version 2.0
+	
+1.	draw(layer,1byte,2byte,3byte,4byte,5byte,6byte,7byte,8byte);		//byte
+2.	drawLayer(layer);													//byte
+3.	drawWall(wall);														//byte
+4.	drawWall90(wall);													//byte
+5.	drawCube("64*bytes");												//byte
+6.	time(time);															//int
+	
+	
+Funktion	
+   \/
+1.	--> Zeichnet auf die entsprechnede Ebene die Dahtenwerte
+2.	--> Zeichnet eine von 8 Ebenen komplett
+3.	--> Zeichnet eine von 8 Wänden komplett
+4.  --> Zeichnet eine von 8 Wänden um 90* gedreht komplett
+5.	--> Zeichnet eine individuelle 3D Figur auf den gesamten Würfel
+6. 	--> Setzt die Zeit wie lange ein Frame gezeigt wird	
+
+
+-----------------------------------------------------------------------
+
+	
+version 2.1
+	
+1.	draw(layer,1byte,2byte,3byte,4byte,5byte,6byte,7byte,8byte);		//byte
+2.	drawLayer(layer);													//byte
+3.	drawWall(wall);														//byte
+4.	drawWall90(wall);													//byte
+5.	drawCube("64*bytes");												//byte
+6.	time(time);															//int
+7.	shiftLayerR("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)	
+8.	shiftCubeR("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+	
+Funktion	
+   \/
+1.	--> Zeichnet auf die entsprechnede Ebene die Dahtenwerte
+2.	--> Zeichnet eine von 8 Ebenen komplett
+3.	--> Zeichnet eine von 8 Wänden komplett
+4.  --> Zeichnet eine von 8 Wänden um 90* gedreht komplett
+5.	--> Zeichnet eine individuelle 3D Figur auf den gesamten Würfel
+6. 	--> Setzt die Zeit wie lange ein Frame gezeigt wird		
+7.	--> Shiftet und setzt die Fläche um 1 nach rechts	
+
+
+-----------------------------------------------------------------------
+
+	
+version 2.1.2
+	
+1.	draw(layer,1byte,2byte,3byte,4byte,5byte,6byte,7byte,8byte);		//byte
+2.	drawLayer(layer);													//byte
+3.	drawWall(wall);														//byte
+4.	drawWall90(wall);													//byte
+5.	drawCube("64*bytes");												//byte
+6.	time(time);															//int
+7.	shiftLayerR("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)	
+8.	shiftCubeR("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+9.	light("wie hell in %")												//byte
+	
+Funktion	
+   \/
+1.	--> Zeichnet auf die entsprechnede Ebene die Dahtenwerte
+2.	--> Zeichnet eine von 8 Ebenen komplett
+3.	--> Zeichnet eine von 8 Wänden komplett
+4.  --> Zeichnet eine von 8 Wänden um 90* gedreht komplett
+5.	--> Zeichnet eine individuelle 3D Figur auf den gesamten Würfel
+6. 	--> Setzt die Zeit wie lange ein Frame gezeigt wird		
+7.	--> Shiftet und setzt die Fläche um 1 nach rechts
+8.	--> Shiftet und setzt den ganzen Würfel um 1 nach rechts
+9.	--> Setzt die Helligkeit des Würfels	
+	
+-----------------------------------------------------------------------
+
+	
+version 2.2.0
+
+NEU:
+Neue Funktionen
+	
+1.	draw(layer,1byte,2byte,3byte,4byte,5byte,6byte,7byte,8byte);		//byte
+2.	drawLayer(layer);													//byte
+3.	drawWall(wall);														//byte
+4.	drawWall90(wall);													//byte
+5.	drawCube("64*bytes");												//byte
+6.	time(time);															//int
+7.	shiftLayerR("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)	
+8.	shiftCubeR("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+9.	light("wie hell in %")												//byte
+10.	rain(wie lange)														//byte
+11.	writeLayer("text","!!Länge des Textes!!",ebene)						//char,byte
+12.	shiftLayerL("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)
+13.	shiftCubeL("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+14.	shiftLayerR90("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)
+15.	shiftLayerL90("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)
+16.	shiftCubeR90("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+17.	shiftCubeL90("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+
+
+	
+Funktion	
+   \/
+1.	--> Zeichnet auf die entsprechnede Ebene die Dahtenwerte
+2.	--> Zeichnet eine von 8 Ebenen komplett
+3.	--> Zeichnet eine von 8 Wänden komplett
+4.  --> Zeichnet eine von 8 Wänden um 90* gedreht komplett
+5.	--> Zeichnet eine individuelle 3D Figur auf den gesamten Würfel
+6. 	--> Setzt die Zeit wie lange ein Frame gezeigt wird		
+7.	--> Shiftet und setzt die Fläche um 1 nach rechts
+8.	--> Shiftet und setzt den ganzen Würfel um 1 nach rechts
+9.	--> Setzt die Helligkeit des Würfels
+10. --> Erzeugt random Regen der von oben nach unten tropft				-- wird noch verbessert
+11. --> Schreibt einen Text auf eine Ebene								-- wird noch verbessert
+12.	--> Shiftet und setzt die Fläche um 1 nach links
+13.	-->	Shiftet und setzt den ganzen Würfel um 1 nach links
+14.	--> Shiftet und setzt die Fläche um 1 und um 90 grad im Uhrzeigersinn nach rechts
+15.	--> Shiftet und setzt die Fläche um 1 und um 90 grad im Uhrzeigersinn nach links
+16.	--> Shiftet und setzt den ganzen Würfel um 1 und um 90 grad im Uhrzeigersinn nach rechts
+17.	--> Shiftet und setzt den ganzen Würfel um 1 und um 90 grad im Uhrzeigersinn nach links
+	
+	
+-----------------------------------------------------------------------
+
+	
+version 2.2.1
+
+NEU:
+Funktion rain() wurde verbessert und benötigt nun 2 Parameter.
+
+
+
+	
+1.	draw(layer,1byte,2byte,3byte,4byte,5byte,6byte,7byte,8byte);		//byte
+2.	drawLayer(layer);													//byte
+3.	drawWall(wall);														//byte
+4.	drawWall90(wall);													//byte
+5.	drawCube("64*bytes");												//byte
+6.	time(time);															//int
+7.	shiftLayerR("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)	
+8.	shiftCubeR("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+9.	light("wie hell in %")												//byte
+10.	rain(wie lange,wie stark von 1-100)														//byte
+11.	writeLayer("text","!!Länge des Textes!!",ebene)						//char,byte
+12.	shiftLayerL("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)
+13.	shiftCubeL("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+14.	shiftLayerR90("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)
+15.	shiftLayerL90("wie viel mal","soll der Übertrag erneut gesetzt werden",8*bytes)
+16.	shiftCubeR90("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+17.	shiftCubeL90("wie viel mal","soll der Übertrag erneut gesetzt werden",64*bytes)
+
+
+	
+Funktion	
+   \/
+1.	--> Zeichnet auf die entsprechnede Ebene die Dahtenwerte
+2.	--> Zeichnet eine von 8 Ebenen komplett
+3.	--> Zeichnet eine von 8 Wänden komplett
+4.  --> Zeichnet eine von 8 Wänden um 90* gedreht komplett
+5.	--> Zeichnet eine individuelle 3D Figur auf den gesamten Würfel
+6. 	--> Setzt die Zeit wie lange ein Frame gezeigt wird		
+7.	--> Shiftet und setzt die Fläche um 1 nach rechts
+8.	--> Shiftet und setzt den ganzen Würfel um 1 nach rechts
+9.	--> Setzt die Helligkeit des Würfels
+10. --> Erzeugt random Regen mit gesetzter Stärke, der von oben nach unten tropft				-- wird noch verbessert
+11. --> Schreibt einen Text auf eine Ebene								-- wird noch verbessert
+12.	--> Shiftet und setzt die Fläche um 1 nach links
+13.	-->	Shiftet und setzt den ganzen Würfel um 1 nach links
+14.	--> Shiftet und setzt die Fläche um 1 und um 90 grad im Uhrzeigersinn nach rechts
+15.	--> Shiftet und setzt die Fläche um 1 und um 90 grad im Uhrzeigersinn nach links
+16.	--> Shiftet und setzt den ganzen Würfel um 1 und um 90 grad im Uhrzeigersinn nach rechts
+17.	--> Shiftet und setzt den ganzen Würfel um 1 und um 90 grad im Uhrzeigersinn nach links
+	
+-----------------------------------------------------------------------
+
+	
+version 3.0.1/3.0.2 BUILD
+
+NEU:
+Kompatiblität mit Arduino Mega(2560).
+Parameterübergabe vereinfacht -->Struct CUBEDATACUBE und CUBEDATALAYER,
+diese werden jetzt jeweils benötigt.
+Neudefinition der Koordinaten
+Neue Funktionen.
+
+1.	CUBEDATACUBE  add					(struct CUBEDATACUBE data1,struct CUBEDATACUBE data2)
+2.	CUBEDATACUBE  subtract				(struct CUBEDATACUBE data1,struct CUBEDATACUBE data2) 
+3.	CUBEDATACUBE  invert				(struct CUBEDATACUBE data)
+4. 	void          light					(byte L)
+5.	void          rain					(byte count,byte amount)
+6. 	void          writeLayer			(char text[],byte lenge,byte layer)
+7.	void          time					(int t)	
+8.	CUBEDATACUBE  getCube				()
+9.	CUBEDATACUBE  getLayer				(byte layer)
+10.	CUBEDATACUBE  getWall				(byte wall)	
+11.	CUBEDATACUBE  getWall90				(byte wall)
+12.	void          shiftLayerRight    	(int count,bool reload, struct CUBEDATALAYER data)
+13.	void          shiftLayerLeft     	(int count,bool reload, struct CUBEDATALAYER data)
+14.	void          shiftLayerRight90  	(int count,bool reload, struct CUBEDATALAYER data)
+15.	void          shiftLayerLeft90   	(int count,bool reload, struct CUBEDATALAYER data)
+16.	void          shiftLayerDown     	(int count,bool reload, struct CUBEDATALAYER data)
+17.	void          shiftLayerUp 	    	(int count,bool reload, struct CUBEDATALAYER data)
+18.	void          shiftCubeRight		(int count,bool reload, struct CUBEDATACUBE data)
+19.	void          shiftCubeLeft			(int count,bool reload, struct CUBEDATACUBE data)
+20.	void          shiftCubeRight90		(int count,bool reload, struct CUBEDATACUBE data)
+21.	void          shiftCubeLeft90		(int count,bool reload, struct CUBEDATACUBE data)
+22.	void          shiftCubeUp	    	(int count,bool reload, struct CUBEDATACUBE data)
+23.	void          shiftCubeDown	    	(int count,bool reload, struct CUBEDATACUBE data)
+24.	CUBEDATALAYER getShiftLayerRight  	(int count,bool reload, CUBEDATALAYER data)	
+25.	CUBEDATALAYER getShiftLayerLeft   	(int count,bool reload, CUBEDATALAYER data)	
+26.	CUBEDATALAYER getShiftLayerRight90	(int count,bool reload, CUBEDATALAYER data)	
+27.	CUBEDATALAYER getShiftLayerLeft90 	(int count,bool reload, CUBEDATALAYER data)	
+28.	CUBEDATALAYER getShiftLayerDown   	(int count,bool reload, CUBEDATALAYER data)	
+29.	CUBEDATALAYER getShiftLayerUp 	  	(int count,bool reload, CUBEDATALAYER data)		
+30.	CUBEDATACUBE  getShiftCubeRight	  	(int count,bool reload, CUBEDATACUBE data)
+31.	CUBEDATACUBE  getShiftCubeLeft	  	(int count,bool reload, CUBEDATACUBE data)
+32.	CUBEDATACUBE  getShiftCubeRight90  	(int count,bool reload, CUBEDATACUBE data)
+33.	CUBEDATACUBE  getShiftCubeLeft90	(int count,bool reload, CUBEDATACUBE data)	
+34.	CUBEDATACUBE  getShiftCubeUp		(int count,bool reload, CUBEDATACUBE data)
+35.	CUBEDATACUBE  getShiftCubeDown	  	(int count,bool reload, CUBEDATACUBE data)
+
+	
+Funktion	
+   \/
+   
+1.	--> Addiert 2 Werte vom Typ CUBEDATACUBE zusammen und giebt das Resultat zurück.  
+2.	--> Subdrahiert den zweiten Wert vom ersten mit dem Datentyp CUBEDATACUBE und giebt das Resultat zurück.
+3.	--> Invertiert den Wert vom Datentyp CUBEDATACUBE und giebt das Resultat zurück.
+4. 	--> Setzt die Helligkeit des Würfels.
+5.	--> Erzeugt random Regen mit gesetzter Stärke, der von oben nach unten tropft.
+6. 	--> Schreibt einen Text auf eine Ebene. 			!!In dieser Version nicht vorhanden!!
+7.	--> Setzt die Zeit wie lange ein Bild gezeigt wird.
+8.	--> Giebt ein Wert vom Typ CUBEDATACUBE zurück wo jede LED des Cubes leuchtet
+9.	--> Giebt ein Wert vom Typ CUBEDATACUBE zurück wo die gewünschte Ebene follständig leuchtet.
+10.	--> Giebt ein Wert vom Typ CUBEDATACUBE zurück wo die gewünschte Wand follständig leuchtet.
+11.	--> Giebt ein Wert vom Typ CUBEDATACUBE zurück wo die gewünschte Wand um 90 Grad follständig leuchtet.
+12.	--> Shiftet und setzt die Fläche um 1 nach rechts, so oft wie "counts" gesetzt sind.  
+13.	--> Shiftet und setzt die Fläche um 1 nach links, so oft wie "counts" gesetzt sind.    
+14.	--> Shiftet und setzt die Fläche um 1 nach rechts um 90 Grad, so oft wie "counts" gesetzt sind.    
+15.	--> Shiftet und setzt die Fläche um 1 nach links um 90 Grad, so oft wie "counts" gesetzt sind.    
+16.	--> Shiftet und setzt die Fläche um 1 nach oben so oft wie "counts" gesetzt sind.    
+17.	--> Shiftet und setzt die Fläche um 1 nach unten so oft wie "counts" gesetzt sind.
+18.	--> Shiftet und setzt den Würfel um 1 nach rechts, so oft wie "counts" gesetzt sind.  
+19.	--> Shiftet und setzt den Würfel um 1 nach links, so oft wie "counts" gesetzt sind.    
+20.	--> Shiftet und setzt den Würfel um 1 nach rechts um 90 Grad, so oft wie "counts" gesetzt sind.
+21.	--> Shiftet und setzt den Würfel um 1 nach links um 90 Grad, so oft wie "counts" gesetzt sind. 
+22.	--> Shiftet und setzt den Würfel um 1 nach oben so oft wie "counts" gesetzt sind.    
+23.	--> Shiftet und setzt den Würfel um 1 nach unten so oft wie "counts" gesetzt sind.
+24.	--> Shiftet und setzt die Fläche nach rechts, so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATALAYER aus.
+25.	--> Shiftet und setzt die Fläche nach links, so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATALAYER aus.     
+26.	--> Shiftet und setzt die Fläche nach rechts um 90 Grad, so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATALAYER aus.    
+27.	--> Shiftet und setzt die Fläche nach links um 90 Grad, so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATALAYER aus.   
+28.	--> Shiftet und setzt die Fläche nach oben so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATALAYER aus.    
+29.	--> Shiftet und setzt die Fläche nach unten so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATALAYER aus. 
+30.	--> Shiftet und setzt den Würfel nach rechts, so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATACUBE aus.   
+31.	--> Shiftet und setzt den Würfel nach links, so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATACUBE aus.     
+32.	--> Shiftet und setzt den Würfel nach rechts um 90 Grad, so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATACUBE aus. 
+33.	--> Shiftet und setzt den Würfel nach links um 90 Grad, so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATACUBE aus.  
+34.	--> Shiftet und setzt den Würfel nach oben so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATACUBE aus.    
+35.	--> Shiftet und setzt den Würfel nach unten so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATACUBE aus.
+  
+  
+  
+ -----------------------------------------------------------------------
+
+	
+version 3.0.3 BUILD
+
+NEU:
+PWM Verbesserung
+3 Funktionen: rotation
+
+1.	CUBEDATACUBE  add					(struct CUBEDATACUBE data1,struct CUBEDATACUBE data2)
+2.	CUBEDATACUBE  subtract				(struct CUBEDATACUBE data1,struct CUBEDATACUBE data2) 
+3.	CUBEDATACUBE  invert				(struct CUBEDATACUBE data)
+4. 	void          light					(byte L)
+5.	void          rain					(byte count,byte amount)
+6. 	void          writeLayer			(char text[],byte lenge,byte layer)
+7.	void          time					(int t)	
+8.	CUBEDATACUBE  getCube				()
+9.	CUBEDATACUBE  getLayer				(byte layer)
+10.	CUBEDATACUBE  getWall				(byte wall)	
+11.	CUBEDATACUBE  getWall90				(byte wall)
+12.	void          shiftLayerRight    	(int count,bool reload, struct CUBEDATALAYER data)
+13.	void          shiftLayerLeft     	(int count,bool reload, struct CUBEDATALAYER data)
+14.	void          shiftLayerRight90  	(int count,bool reload, struct CUBEDATALAYER data)
+15.	void          shiftLayerLeft90   	(int count,bool reload, struct CUBEDATALAYER data)
+16.	void          shiftLayerDown     	(int count,bool reload, struct CUBEDATALAYER data)
+17.	void          shiftLayerUp 	    	(int count,bool reload, struct CUBEDATALAYER data)
+18.	void          shiftCubeRight		(int count,bool reload, struct CUBEDATACUBE data)
+19.	void          shiftCubeLeft			(int count,bool reload, struct CUBEDATACUBE data)
+20.	void          shiftCubeRight90		(int count,bool reload, struct CUBEDATACUBE data)
+21.	void          shiftCubeLeft90		(int count,bool reload, struct CUBEDATACUBE data)
+22.	void          shiftCubeUp	    	(int count,bool reload, struct CUBEDATACUBE data)
+23.	void          shiftCubeDown	    	(int count,bool reload, struct CUBEDATACUBE data)
+24.	CUBEDATALAYER getShiftLayerRight  	(int count,bool reload, CUBEDATALAYER data)	
+25.	CUBEDATALAYER getShiftLayerLeft   	(int count,bool reload, CUBEDATALAYER data)	
+26.	CUBEDATALAYER getShiftLayerRight90	(int count,bool reload, CUBEDATALAYER data)	
+27.	CUBEDATALAYER getShiftLayerLeft90 	(int count,bool reload, CUBEDATALAYER data)	
+28.	CUBEDATALAYER getShiftLayerDown   	(int count,bool reload, CUBEDATALAYER data)	
+29.	CUBEDATALAYER getShiftLayerUp 	  	(int count,bool reload, CUBEDATALAYER data)		
+30.	CUBEDATACUBE  getShiftCubeRight	  	(int count,bool reload, CUBEDATACUBE data)
+31.	CUBEDATACUBE  getShiftCubeLeft	  	(int count,bool reload, CUBEDATACUBE data)
+32.	CUBEDATACUBE  getShiftCubeRight90  	(int count,bool reload, CUBEDATACUBE data)
+33.	CUBEDATACUBE  getShiftCubeLeft90	(int count,bool reload, CUBEDATACUBE data)	
+34.	CUBEDATACUBE  getShiftCubeUp		(int count,bool reload, CUBEDATACUBE data)
+35.	CUBEDATACUBE  getShiftCubeDown	  	(int count,bool reload, CUBEDATACUBE data)
+36. CUBEDATACUBE  getRotate90			(int count,struct CUBEDATACUBE data)
+37. CUBEDATACUBE  getRotate				(int count,struct CUBEDATACUBE data)
+38. CUBEDATACUBE  getRotateUp			(int count,struct CUBEDATACUBE data)
+39. void 		  rotate90				(int count,struct CUBEDATACUBE data)
+40. void 		  rotate				(int count,struct CUBEDATACUBE data)
+41. void 		  rotateUp				(int count,struct CUBEDATACUBE data)
+
+
+
+	
+Funktion	
+   \/
+   
+1.	--> Addiert 2 Werte vom Typ CUBEDATACUBE zusammen und giebt das Resultat zurück.  
+2.	--> Subdrahiert den zweiten Wert vom ersten mit dem Datentyp CUBEDATACUBE und giebt das Resultat zurück.
+3.	--> Invertiert den Wert vom Datentyp CUBEDATACUBE und giebt das Resultat zurück.
+4. 	--> Setzt die Helligkeit des Würfels.
+5.	--> Erzeugt random Regen mit gesetzter Stärke, der von oben nach unten tropft.
+6. 	--> Schreibt einen Text auf eine Ebene. 			!!In dieser Version nicht vorhanden!!
+7.	--> Setzt die Zeit wie lange ein Bild gezeigt wird.
+8.	--> Giebt ein Wert vom Typ CUBEDATACUBE zurück wo jede LED des Cubes leuchtet
+9.	--> Giebt ein Wert vom Typ CUBEDATACUBE zurück wo die gewünschte Ebene follständig leuchtet.
+10.	--> Giebt ein Wert vom Typ CUBEDATACUBE zurück wo die gewünschte Wand follständig leuchtet.
+11.	--> Giebt ein Wert vom Typ CUBEDATACUBE zurück wo die gewünschte Wand um 90 Grad follständig leuchtet.
+12.	--> Shiftet und setzt die Fläche um 1 nach rechts, so oft wie "counts" gesetzt sind.  
+13.	--> Shiftet und setzt die Fläche um 1 nach links, so oft wie "counts" gesetzt sind.    
+14.	--> Shiftet und setzt die Fläche um 1 nach rechts um 90 Grad, so oft wie "counts" gesetzt sind.    
+15.	--> Shiftet und setzt die Fläche um 1 nach links um 90 Grad, so oft wie "counts" gesetzt sind.    
+16.	--> Shiftet und setzt die Fläche um 1 nach oben so oft wie "counts" gesetzt sind.    
+17.	--> Shiftet und setzt die Fläche um 1 nach unten so oft wie "counts" gesetzt sind.
+18.	--> Shiftet und setzt den Würfel um 1 nach rechts, so oft wie "counts" gesetzt sind.  
+19.	--> Shiftet und setzt den Würfel um 1 nach links, so oft wie "counts" gesetzt sind.    
+20.	--> Shiftet und setzt den Würfel um 1 nach rechts um 90 Grad, so oft wie "counts" gesetzt sind.
+21.	--> Shiftet und setzt den Würfel um 1 nach links um 90 Grad, so oft wie "counts" gesetzt sind. 
+22.	--> Shiftet und setzt den Würfel um 1 nach oben so oft wie "counts" gesetzt sind.    
+23.	--> Shiftet und setzt den Würfel um 1 nach unten so oft wie "counts" gesetzt sind.
+24.	--> Shiftet die Fläche nach rechts, so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATALAYER aus.
+25.	--> Shiftet die Fläche nach links, so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATALAYER aus.     
+26.	--> Shiftet die Fläche nach rechts um 90 Grad, so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATALAYER aus.    
+27.	--> Shiftet die Fläche nach links um 90 Grad, so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATALAYER aus.   
+28.	--> Shiftet die Fläche nach oben so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATALAYER aus.    
+29.	--> Shiftet die Fläche nach unten so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATALAYER aus. 
+30.	--> Shiftet den Würfel nach rechts, so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATACUBE aus.   
+31.	--> Shiftet den Würfel nach links, so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATACUBE aus.     
+32.	--> Shiftet den Würfel nach rechts um 90 Grad, so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATACUBE aus. 
+33.	--> Shiftet den Würfel nach links um 90 Grad, so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATACUBE aus.  
+34.	--> Shiftet den Würfel nach oben so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATACUBE aus.    
+35.	--> Shiftet den Würfel nach unten so oft wie "counts" gesetzt sind und gibt sie mit dem Typ CUBEDATACUBE aus. 
+36. --> Rotiert den Würfel entlang der X Achse im Uhrzeigersinn um jewails 90* und giebt ihn mit dem Typ CUBEDATALAYER zurück.
+37. --> Rotiert den Würfel entlang der Y Achse im Uhrzeigersinn um jewails 90* und giebt ihn mit dem Typ CUBEDATALAYER zurück.
+38. --> Rotiert den Würfel entlang der Z Achse im Uhrzeigersinn um jewails 90* und giebt ihn mit dem Typ CUBEDATALAYER zurück.
+39.	--> Rotiert den Würfel entlang der X Achse im Uhrzeigersinn um jewails 90* und zeichnet ihn auch.
+40.	--> Rotiert den Würfel entlang der Y Achse im Uhrzeigersinn um jewails 90* und zeichnet ihn auch.
+41.	--> Rotiert den Würfel entlang der Z Achse im Uhrzeigersinn um jewails 90* und zeichnet ihn auch.
+	

@@ -15,17 +15,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
+#include <Servo.h> 
+ 
 
 // Reference the I2C Library
 #include <Wire.h>
 // Reference the HMC5883L Compass Library
 #include <HMC5883L.h>
-
+Servo myservo;
 // Store our compass as a variable.
 HMC5883L compass;
 // Record any errors that may occur in the compass.
 int error = 0;
-
+int servoPos = 0;
 // Out setup routine, here we will configure the microcontroller and compass.
 void setup()
 {
@@ -47,6 +49,8 @@ void setup()
   error = compass.SetMeasurementMode(Measurement_Continuous); // Set the measurement mode to Continuous
   if(error != 0) // If there is an error, print it out.
     Serial.println(compass.GetErrorText(error));
+    
+    myservo.attach(9);
 }
 
 // Our main program loop.
@@ -82,7 +86,24 @@ void loop()
   float headingDegrees = heading * 180/M_PI; 
 
   // Output the data via the serial port.
-  Output(raw, scaled, heading, headingDegrees);
+  
+  
+  
+  
+  //int val = map(headingDegrees, 0, 360, 200, 0);
+  
+  
+  
+  
+  
+  
+  
+  
+   myservo.write(servoPos);
+    //Serial.println(val);
+  delay(15); 
+  
+  //Output(raw, scaled, heading, headingDegrees);
 
   // Normally we would delay the application by 66ms to allow the loop
   // to run at 15Hz (default bandwidth for the HMC5883L).

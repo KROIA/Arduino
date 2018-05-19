@@ -1,57 +1,123 @@
 // Autor: 									Alex Krieg
-// Erstellt:								13.5.16
-// Version 									3.0.3 BUILD
-// Kompatibel mit den versionen: 			3.0.0 BUILD
+// Erstellt:								16.9.16
+// Version 									5.0.0
+// Kompatibel mit den versionen: 			*****
 // Funktionen:								*****
 // Hardware									Arduino Mega (2560)
-
+// Hardware Cube 							Rev3
 
 
 #include "ledcube8.h"
 #include "Arduino.h"
  
 	LedCube8::LedCube8(){
+	
+		
+		IC_SERIAL  = 	new byte[9];//
+		IC_OE	  	  =	12;			//Arduino Mega Pinout for storage					
+		IC_C2     	  =	11;			//			
+		IC_RESET  	  =	13;			//			
+		IC_C1     	  =	10;			//
+		IC_SERIAL[0]  = 22;         //
+		IC_SERIAL[1]  = 23;         //
+		IC_SERIAL[2]  = 24;         //
+		IC_SERIAL[3]  = 25;         //
+		IC_SERIAL[4]  = 26;			// 
+		IC_SERIAL[5]  = 27;         //
+		IC_SERIAL[6]  = 28;         //
+		IC_SERIAL[7]  = 29;         //
+		IC_SERIAL[8]  = 4;          //
 	 
-	 ledpin				= new byte[8];
-	 ledAddresspin		= new byte[4];
-	 layerpin			= new byte[4];
-	 
-	 for(int i=0; i<8; i++)
-	 { 
-		 ledpin[i]			=	i+2; // Das Array hat 8 bits
-	 }
-	 for(int i=0; i<4; i++)
-	 {
-		 
-		 ledAddresspin[i]	=	i+10;
-	 }
-	 layerpin[0] = A0;
-	 layerpin[1] = A1;
-	 layerpin[2] = A2;
-	 layerpin[3] = A3;
-	 counter = B00000000;
 	 init(); 
  }
 	LedCube8::~LedCube8(){}
 	void LedCube8::init(){
-	 for(int i=0; i<8; i++)
+		
+		Wire.begin();   
+		pinMode(2,INPUT);		//----SD-READ----
+		pinMode(A8,INPUT);      //
+		pinMode(A9,INPUT);      //
+		pinMode(A10,INPUT);     //
+		pinMode(A11,INPUT);     //
+		pinMode(A12,INPUT);     //
+		pinMode(A13,INPUT);     //
+		pinMode(A14,INPUT);     //
+		pinMode(A15,INPUT);     //
+		
+		pinMode(IC_OE	 ,OUTPUT);
+		pinMode(IC_C2    ,OUTPUT);
+		pinMode(IC_RESET ,OUTPUT);
+		pinMode(IC_C1    ,OUTPUT);
+		
+	 for(int i=0; i<9; i++)
 	 {
-		pinMode(ledpin[i],		OUTPUT);
+		pinMode(IC_SERIAL[i],OUTPUT);
 	 }
-	 for(int i=0; i<4; i++)
-	 {
-		pinMode(layerpin[i],		OUTPUT);
-		pinMode(ledAddresspin[i],	OUTPUT);
-	 }
-	 Time 	= 1000;
-	 helligkeit= 100;
-	 hackLightStatus = false;
-	 startMillis	=0;
-	 referenzMillis	=0;
-	 benotigtMillis	=1;
+	 digitalWrite(IC_OE,HIGH);		// INVERT THE SIGNAL
+	 digitalWrite(IC_RESET,HIGH);   //
+
+	 Time 					= 1000;
+	 helligkeit				= 100;
+	 hackLightStatus 		= false;
+	 startMillis			= 0;
+	 referenzMillis			= 0;
+	 benotigtMillis			= 1;
  }
-	
-	
+	//-------------------SD---------------------------
+    CUBEDATACUBE LedCube8::readSD()
+	{
+		CUBEDATACUBE temp = invert(getCube());
+		byte counter  = 0;
+		
+	Wire.beginTransmission(8);
+	Wire.write("1"); //SEND
+	Wire.endTransmission(); 
+		
+		while(counter < 8)
+		{
+			//if(digitalRead(2) == 1)
+				/*if((PINE & B00010000) == B00010000)
+				{
+				while((PINE & B00010000 == B00010000))
+				{}
+				delayMicroseconds(100);
+				PORTE = PORTE | B00010000;
+				delayMicroseconds(100);
+				PORTE = PORTE | B00000000;
+				}*/
+			if((PINE & B00010000) == B00010000)
+			{
+				
+				
+				counter++;
+				/*Serial.print(PINK,BIN);
+			Serial.print("\t");
+			Serial.print((PORTE && B00010000),BIN);
+			Serial.print("\t");
+			Serial.println("");*/
+				switch(counter)
+				{
+					case 1:{temp.CA8 = PINK;}
+					case 2:{temp.CB8 = PINK;}
+					case 3:{temp.CC8 = PINK;}
+					case 4:{temp.CD8 = PINK;}
+					case 5:{temp.CE8 = PINK;}
+					case 6:{temp.CF8 = PINK;}
+					case 7:{temp.CG8 = PINK;}
+					case 8:{temp.CH8 = PINK;}
+					
+					default:
+					{}
+				}
+				//while(digitalRead(2) == 1)
+				while((PINE & B00010000) == B00010000)
+				{}
+			}
+			
+		}
+		return temp;
+	}
+	//-------------------Math-------------------------
 	CUBEDATACUBE 	LedCube8::add					(struct CUBEDATACUBE data1,struct CUBEDATACUBE data2){
 		
 		data1.CA1 = data2.CA1 | data1.CA1; data1.CA2 = data2.CA2 | data1.CA2;
@@ -136,112 +202,19 @@
 		data = subtract(getCube(), data);
 		return data;
 	}
-	void 			LedCube8::draw					(struct CUBEDATALAYER data){
-	 byte bufferHelligkeit = helligkeit;
-	 if(hackLightStatus == false)
-	 {
-		helligkeit = helligkeit/8;
-	 }
-	for(int i = 0; i<Time; i++)
-	{		
-	setPin(data.A,countAddress());
-	setPin(data.B,countAddress());
-	setPin(data.C,countAddress());
-	setPin(data.D,countAddress());
-	setPin(data.E,countAddress());
-	setPin(data.F,countAddress());
-	setPin(data.G,countAddress());
-	setPin(data.H,countAddress());
-	setLayer(data.Layer);
-	}
-	//PORTB = (PORTB & B111100) | ((B00000000 & B11000000) >> 6);  // pins nach dem setztn auf 0 scheriben
-	//PORTD = (PORTB & B00000011) |(B00000000 << 2);				 //
-	
-	helligkeit = bufferHelligkeit;
-	 
- }
 	void 			LedCube8::drawCube				(struct CUBEDATACUBE data){
+		resetICs();
 		for(int i=0; i<Time/8; i++)
 		{
-			setPin(data.CH1, countAddress());
-			setPin(data.CG1, countAddress());
-			setPin(data.CF1, countAddress());
-			setPin(data.CE1, countAddress());
-			setPin(data.CD1, countAddress());
-			setPin(data.CC1, countAddress());
-			setPin(data.CB1, countAddress());
-			setPin(data.CA1, countAddress());
-			setLayer(1);
-			
-			setPin(data.CH2, countAddress());
-			setPin(data.CG2, countAddress());
-			setPin(data.CF2, countAddress());
-			setPin(data.CE2, countAddress());
-			setPin(data.CD2, countAddress());
-			setPin(data.CC2, countAddress());
-			setPin(data.CB2, countAddress());
-			setPin(data.CA2, countAddress());
-			setLayer(2); 
-			             
-			setPin(data.CH3, countAddress());
-			setPin(data.CG3, countAddress());
-			setPin(data.CF3, countAddress());
-			setPin(data.CE3, countAddress());
-			setPin(data.CD3, countAddress());
-			setPin(data.CC3, countAddress());
-			setPin(data.CB3, countAddress());
-			setPin(data.CA3, countAddress());
-			setLayer(3); 
-			             
-			setPin(data.CH4, countAddress());
-			setPin(data.CG4, countAddress());
-			setPin(data.CF4, countAddress());
-			setPin(data.CE4, countAddress());
-			setPin(data.CD4, countAddress());
-			setPin(data.CC4, countAddress());
-			setPin(data.CB4, countAddress());
-			setPin(data.CA4, countAddress());
-			setLayer(4); 
-			             
-			setPin(data.CH5, countAddress());
-			setPin(data.CG5, countAddress());
-			setPin(data.CF5, countAddress());
-			setPin(data.CE5, countAddress());
-			setPin(data.CD5, countAddress());
-			setPin(data.CC5, countAddress());
-			setPin(data.CB5, countAddress());
-			setPin(data.CA5, countAddress());
-			setLayer(5); 
-			             
-			setPin(data.CH6, countAddress());
-			setPin(data.CG6, countAddress());
-			setPin(data.CF6, countAddress());
-			setPin(data.CE6, countAddress());
-			setPin(data.CD6, countAddress());
-			setPin(data.CC6, countAddress());
-			setPin(data.CB6, countAddress());
-			setPin(data.CA6, countAddress());
-			setLayer(6); 
-			             
-			setPin(data.CH7, countAddress());
-			setPin(data.CG7, countAddress());
-			setPin(data.CF7, countAddress());
-			setPin(data.CE7, countAddress());
-			setPin(data.CD7, countAddress());
-			setPin(data.CC7, countAddress());
-			setPin(data.CB7, countAddress());
-			setPin(data.CA7, countAddress());
-			setLayer(7); 
-			             
-			setPin(data.CH8, countAddress());
-			setPin(data.CG8, countAddress());
-			setPin(data.CF8, countAddress());
-			setPin(data.CE8, countAddress());
-			setPin(data.CD8, countAddress());
-			setPin(data.CC8, countAddress());
-			setPin(data.CB8, countAddress());
-			setPin(data.CA8, countAddress());
-			setLayer(8);
+			PORTB = (PORTB & B00111111) | B11000000; // OE auf HIGH
+			setICs(data.CA1,data.CB1,data.CC1,data.CD1,data.CE1,data.CF1,data.CG1,data.CH1,0);
+			setICs(data.CA2,data.CB2,data.CC2,data.CD2,data.CE2,data.CF2,data.CG2,data.CH2,1);
+			setICs(data.CA3,data.CB3,data.CC3,data.CD3,data.CE3,data.CF3,data.CG3,data.CH3,2);
+			setICs(data.CA4,data.CB4,data.CC4,data.CD4,data.CE4,data.CF4,data.CG4,data.CH4,3);
+			setICs(data.CA5,data.CB5,data.CC5,data.CD5,data.CE5,data.CF5,data.CG5,data.CH5,4);
+			setICs(data.CA6,data.CB6,data.CC6,data.CD6,data.CE6,data.CF6,data.CG6,data.CH6,5);
+			setICs(data.CA7,data.CB7,data.CC7,data.CD7,data.CE7,data.CF7,data.CG7,data.CH7,6);
+			setICs(data.CA8,data.CB8,data.CC8,data.CD8,data.CE8,data.CF8,data.CG8,data.CH8,7);
 		}
 	}
 	//-------------------GET-------------------------
@@ -273,48 +246,6 @@
 	}
 	CUBEDATACUBE 	LedCube8::getWall90				(byte wall){
 		return calculateDrawWall90(wall);
-	}	
-	CUBEDATALAYER 	LedCube8::getShiftLayerRight  	(int count,bool reload, struct CUBEDATALAYER data){
-		for(int x = 0; x<count; x++)
-	  {	
-		data = calculateShiftLayerRight(1,reload,data);
-	  }
-	  return data;
-	}
-	CUBEDATALAYER 	LedCube8::getShiftLayerLeft   	(int count,bool reload, struct CUBEDATALAYER data){
-		for(int x = 0; x<count; x++)
-	  {	
-		data = calculateShiftLayerLeft(1,reload,data);
-	  }
-	  return data;
-	}
-	CUBEDATALAYER 	LedCube8::getShiftLayerRight90	(int count,bool reload, struct CUBEDATALAYER data){
-		for(int x = 0; x<count; x++)
-	  {	
-		data = calculateShiftLayerLeft(1,reload,data);
-	  }
-	  return data;
-	}
-	CUBEDATALAYER 	LedCube8::getShiftLayerLeft90 	(int count,bool reload, struct CUBEDATALAYER data){
-		for(int x = 0; x<count; x++)
-	  {
-		data = calculateShiftLayerLeft90(1,reload,data);
-	  }
-	  return data;
-	}
-	CUBEDATALAYER 	LedCube8::getShiftLayerDown   	(int count,bool reload, struct CUBEDATALAYER data){
-		for(int i=0; i<count;i++)
-		{
-		data = calculateShiftLayerDown(1,reload,data);
-		}
-		return data;
-	}
-	CUBEDATALAYER 	LedCube8::getShiftLayerUp 		(int count,bool reload, struct CUBEDATALAYER data){
-		for(int i=0; i<count;i++)
-		{
-		data = calculateShiftLayerUp(1,reload,data);
-		}
-		return data;
 	}	
 	CUBEDATACUBE 	LedCube8::getShiftCubeRight		(int count,bool reload, struct CUBEDATACUBE data){
 		for(int i=0; i<count;i++)
@@ -377,48 +308,6 @@
 	void 			LedCube8::drawWall90			(byte wall){
 		drawCube(calculateDrawWall90(wall));
 	}
-	void			LedCube8::shiftLayerRight    	(int count,bool reload, struct CUBEDATALAYER data){
-		for(int x = 0; x<count; x++)
-	  {	
-		draw(data);
-		data = calculateShiftLayerRight(1,reload,data);
-	  }
-	}
-	void 			LedCube8::shiftLayerLeft    	(int count,bool reload, struct CUBEDATALAYER data){
-		for(int x = 0; x<count; x++)
-	  {	
-		draw(data);
-		data = calculateShiftLayerLeft(1,reload,data);
-	  }
-	}
-	void 			LedCube8::shiftLayerRight90  	(int count,bool reload, struct CUBEDATALAYER data){
-		for(int x = 0; x<count; x++)
-	  {
-		draw(data);
-		data = calculateShiftLayerRight90(1,reload,data);
-	  }
-	}
-	void 			LedCube8::shiftLayerLeft90  	(int count,bool reload, struct CUBEDATALAYER data){
-		for(int x = 0; x<count; x++)
-	  {	
-		draw(data);
-		data = calculateShiftLayerLeft90(1,reload,data);
-	  }
-	}
-	void 			LedCube8::shiftLayerDown 		(int count,bool reload, struct CUBEDATALAYER data){
-		for(int i=0; i<count;i++)
-		{
-		draw(data);
-		data = calculateShiftLayerDown(1,reload,data);
-		}
-	}
-	void 			LedCube8::shiftLayerUp 			(int count,bool reload, struct CUBEDATALAYER data){
-		for(int i=0; i<count;i++)
-		{
-		draw(data);
-		data = calculateShiftLayerUp(1,reload,data);
-		}
-	}	
 	void 			LedCube8::shiftCubeRight		(int count,bool reload, struct CUBEDATACUBE data){
 		for(int i=0; i<count;i++)
 		{
@@ -1807,155 +1696,7 @@ gegen uhrzeiger			 data2.CA6 = data.CF8; data2.CB6 = data.CF7; data2.CC6 = data.
 	  return x;
 	  
   } 
-	 CUBEDATALAYER 	LedCube8::calculateShiftLayerRight90(int count,bool reload, struct CUBEDATALAYER data){ 
-	  //draw(data);
-	  for(int x = 0; x<count; x++)
-	  {
-		  if(reload == true)
-		  {	  
-			  data.A = ((data.A & B00000001 )<<7)| (data.A>>1);
-			  data.B = ((data.B & B00000001 )<<7)| (data.B>>1);
-			  data.C = ((data.C & B00000001 )<<7)| (data.C>>1);
-			  data.D = ((data.D & B00000001 )<<7)| (data.D>>1);
-			  data.E = ((data.E & B00000001 )<<7)| (data.E>>1);
-			  data.F = ((data.F & B00000001 )<<7)| (data.F>>1);
-			  data.G = ((data.G & B00000001 )<<7)| (data.G>>1);
-			  data.H = ((data.H & B00000001 )<<7)| (data.H>>1);
-		  }
-		  else
-		  {
-			  data.A = data.A >> 1;
-			  data.B = data.B >> 1;
-			  data.C = data.C >> 1;
-			  data.D = data.D >> 1;
-			  data.E = data.E >> 1;
-			  data.F = data.F >> 1;
-			  data.G = data.G >> 1;
-			  data.H = data.H >> 1;
-		  }
-		 // draw(data);
-	  }
-	  return data;
-  }
-	 CUBEDATALAYER 	LedCube8::calculateShiftLayerLeft90(int count,bool reload, struct CUBEDATALAYER data){
-	 // draw(data);
-	  for(int x = 0; x<count; x++)
-	  {
-		  if(reload == true)
-		  {	  
-			  data.A = ((data.A&B10000000 )>>7)| (data.A<<1);
-			  data.B = ((data.B&B10000000 )>>7)| (data.B<<1);
-			  data.C = ((data.C&B10000000 )>>7)| (data.C<<1);
-			  data.D = ((data.D&B10000000 )>>7)| (data.D<<1);
-			  data.E = ((data.E&B10000000 )>>7)| (data.E<<1);
-			  data.F = ((data.F&B10000000 )>>7)| (data.F<<1);
-			  data.G = ((data.G&B10000000 )>>7)| (data.G<<1);
-			  data.H = ((data.H&B10000000 )>>7)| (data.H<<1);
-		  }
-		  else
-		  {
-			  data.A = data.A << 1;
-			  data.B = data.B << 1;
-			  data.C = data.C << 1;
-			  data.D = data.D << 1;
-			  data.E = data.E << 1;
-			  data.F = data.F << 1;
-			  data.G = data.G << 1;
-			  data.H = data.H << 1;
-		  }
-		  //draw(data);
-	  }
-	  return data;
-  }
-	 CUBEDATALAYER 	LedCube8::calculateShiftLayerLeft(int count,bool reload, struct CUBEDATALAYER data){
-	  //draw(data);
-	  for(int x = 0; x<count; x++)
-	  {
-		  byte buffer = data.H;
-		  if(reload == true)
-		  {	  	       
-			  data.H = data.G;
-			  data.G = data.F;
-			  data.F = data.E;
-			  data.E = data.D;
-			  data.D = data.C;
-			  data.C = data.B;
-			  data.B = data.A;
-			  data.A = buffer;
-		  }
-		  else
-		  {            
-			  data.H = data.G;
-			  data.G = data.F;
-			  data.F = data.E;
-			  data.E = data.D;
-			  data.D = data.C;
-			  data.C = data.B;
-			  data.B = data.A;
-			  data.A = 0;
-		  }
-		  //draw(data);
-	  }
-	  return data;
-  }
-	 CUBEDATALAYER 	LedCube8::calculateShiftLayerRight(int count,bool reload, struct CUBEDATALAYER data){
-	  //draw(data);
-	  for(int x = 0; x<count; x++)
-	  {
-		  byte buffer = data.A;
-		  if(reload == true)
-		  {	          
-			 data.A = data.B;
-			 data.B = data.C;
-			 data.C = data.D;
-			 data.D = data.E;
-			 data.E = data.F;
-			 data.F = data.G;
-			 data.G = data.H;
-			 data.H = buffer;
-		  }
-		  else
-		  {            
-			  data.A = data.B;
-			  data.B = data.C;
-			  data.C = data.D;
-			  data.D = data.E;
-			  data.E = data.F;
-			  data.F = data.G;
-			  data.G = data.H;
-			  data.H = 0;
-		  }
-		  //draw(data);
-	  }
-	  return data;
-  }
-	 CUBEDATALAYER 	LedCube8::calculateShiftLayerDown(int count,bool reload, struct CUBEDATALAYER data){
-		for(int i=0; i<count;i++)
-		{
-			//draw(data);
-			data.Layer--;
-			if(data.Layer == 0 && reload == true)
-			{
-				data.Layer = 8;
-			}
-			
-		}
-		return data;
-	}	
-	 CUBEDATALAYER 	LedCube8::calculateShiftLayerUp(int count,bool reload, struct CUBEDATALAYER data){
-		for(int i=0; i<count;i++)
-		{
-			draw(data);
-			data.Layer++;
-			if(data.Layer == 9 && reload == true)
-			{
-				data.Layer = 1;
-			}
-			
-		}
-		return data;
-	} 
-     CUBEDATACUBE 	LedCube8::calculateShiftCubeRight90(int count,bool reload, struct CUBEDATACUBE data){
+	 CUBEDATACUBE 	LedCube8::calculateShiftCubeRight90(int count,bool reload, struct CUBEDATACUBE data){
 		for(int x = 0; x<count; x++)
 		{
 			//drawCube(data);
@@ -2389,7 +2130,7 @@ gegen uhrzeiger			 data2.CA6 = data.CF8; data2.CB6 = data.CF7; data2.CC6 = data.
 			}	
 			return data;
 		}				
-	 CUBEDATACUBE LedCube8::calculateShiftCubeDown(int count,bool reload, struct CUBEDATACUBE data){
+	 CUBEDATACUBE 	LedCube8::calculateShiftCubeDown(int count,bool reload, struct CUBEDATACUBE data){
 			if (reload == true)
 			{
 				
@@ -2949,44 +2690,87 @@ gegen uhrzeiger			 data2.CA6 = data.CF8; data2.CB6 = data.CF7; data2.CC6 = data.
 	void LedCube8::hackLight(bool status){
 	  hackLightStatus = status;
 	}
-	byte LedCube8::countAddress(){
-	 if(counter >= 8)
-	 {
-		 counter = B00000000; 
-	 }
-	 counter = counter + B00000001;
-	 return counter;
- }
-	void LedCube8::setPin(byte pin, byte address){
-	PORTH = (PORTH & B10000111) | ((pin & B11110000) >> 1);                 //Setzt die pins 6-9
-    PORTE = (PORTE & B11000111) | ((pin & B00000011) << 4)| ( pin & B00001000);//Setzt die pins 2,3,5
-	PORTG = (PORTG & B11011111) | ((pin & B00000100) << 3);					//Setzt die pins 4
-	saveToFlipFlop(address);
-	}
-	void LedCube8::saveToFlipFlop(byte address){
-	PORTB = (PORTB & B00001111) | (address << 4);					//Setzt die pins 10-13  														//-----------------------*********
-	PORTB = (PORTB & B00001111);	                                                                              
-	}
-	void LedCube8::setLayer(byte layer){
+	void LedCube8::resetICs(){
+		PORTB = (PORTB & B01111111) | B00000000;			//Reset OFF
+		PORTB = (PORTB & B11011111) | B00100000;          	//Clock 2 ON and OFF
+		PORTB = (PORTB & B11011111) | B00000000;          	//
+		PORTB = (PORTB & B01111111) | B10000000;			//Reset ON
 		
-	 int r = 0;
-	 while(true)
-	 {
-		 r=r+1;
-		 //for(int i = 0; i<1; i++)				//1ms
-			 { 
-				PORTF = (PORTF & B11110000) | layer;
-				delayMicroseconds(helligkeit+3);
-				if(helligkeit!=0)
-				{
-					PORTF = (PORTF & B11110000) | B000000;
-				}
-				delayMicroseconds(100 - (helligkeit-1));
-			 }	
-		 if(r==9)
-		 {
-			 return;
-		 }
-	 }
-	 
 	}
+	void LedCube8::setICs(byte data1,byte data2,byte data3,byte data4,byte data5,byte data6,byte data7,byte data8,byte layer){
+		
+		for(int i = 0; i<8; i++)
+		{
+			switch(i)
+			{
+				case 0:
+				{
+					PORTA = data1;
+					break;
+				}
+				case 1:
+				{
+					PORTA = data2;
+					break;
+				}
+				case 2:
+				{
+					PORTA = data3;
+					break;
+				}
+				case 3:
+				{
+					PORTA = data4;
+					break;
+				}
+				case 4:
+				{
+					PORTA = data5;
+					break;
+				}
+				case 5:
+				{
+					PORTA = data6;
+					break;
+				}
+				case 6:
+				{
+					PORTA = data7;
+					break;
+				}
+				case 7:
+				{
+					PORTA = data8;
+					break;
+				}
+			}
+			if(i == layer)									//Layer Data
+			{                                           	//
+				PORTG = (PORTG & B11011111) | B00100000;   	//
+			}                                           	//
+			else                                        	//
+			{                                           	//
+				PORTG = (PORTG & B11011111) | B00000000;   	//
+			}                                           	//
+			
+			PORTB = (PORTB & B11101111) | B00010000;     	//Clock 1 ON and OFF
+			PORTB = (PORTB & B11101111) | B00000000;      	//
+		}
+		PORTB = (PORTB & B11011111) | B00100000;          	//Clock 2 ON and OFF
+		PORTB = (PORTB & B11011111) | B00000000;          	//
+		
+		for(byte x = 0; x<10; x++)                      	//Virtual PWM for light
+		{                                               	//
+															//
+			if(helligkeit!=0)                           	//
+			{                                           	//
+				PORTB = (PORTB & B10111111) | B00000000;  	//Set OE to LOW --> LED = ON
+															//
+			}                                           	//
+			delayMicroseconds(helligkeit);              	//
+			PORTB = (PORTB & B10111111) | B01000000;      	//Set OE to HIGH --> LED = OFF
+			delayMicroseconds(101 - (helligkeit));      	//
+		}                                               	//
+	}
+	
+	

@@ -1,0 +1,40 @@
+
+
+
+
+
+1)	#include "Arduino_SPS.h"								Bibliothek einbeziehen
+2)	SPS sps(1);												Instanz von "SPS" mit dem Namen sps erstellen das "1" Modul enthält
+SETUP
+3)	sps.init();												Instanz Intialisieren
+
+LOOP
+	sps.read();												Liest Alle Eingänge der SPS ein
+	
+	byte* Variable[anzahl_SPS_Module] = sps.getInput();		Speichert alle Eingänge in "Variable"
+	byte* Variable[anzahl_SPS_Module] = sps.getOutput();	Speichert alle Ausgänge in "Variable"
+	
+	sps.setOutput(Variable);								Speichert "Variable" in der SPS, muss aber noch mit "write();" gesetzt werden
+															"Variable" muss so erstellt werden: "byte* Variable[anzahl_SPS_Module];"
+	
+	sps.setOutputPin(MODUL,AUSGANG,HIGHoderLOW);			Setzt nur einen Ausgang 
+															"MODUL" 		--> typ byte
+															"AUSGANG"		-->	typ byte aber nur 1-8
+															"HIGHoderLOW"	--> typ boolean
+	
+	boolean VARIALBE sps.getInputPin(MODUL,EINGANG);		Speichert einen einzelnen Eingang in "VARIABLE"
+	boolean VARIALBE sps.getOutputPin(MODUL,EINGANG);		Speichert einen einzelnen Ausgang in "VARIABLE"
+															"MODUL"			--> typ byte
+															"EINGANG"		--> typ byte aber nur 1-8
+															
+	sps.setOutputModul(MODUL,DATA);							Speichert "Variable" in der SPS, muss aber noch mit "write();" gesetzt werden
+															"MODUL"			--> typ byte
+															"DATA"			--> typ byte zb. B11110000
+															
+	sps.write();											Schaltet die Relais der SPS
+	
+	
+	
+	
+	
+	

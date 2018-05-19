@@ -1,26 +1,18 @@
 // Autor: 									Alex Krieg
-// Erstellt:								13.5.16
-// Version 									3.0.3 BUILD
-// Kompatibel mit den versionen: 			3.0.0 BUILD
+// Erstellt:								16.9.16
+// Version 									5.0.0
+// Kompatibel mit den versionen: 			*****
 // Funktionen:								*****
 // Hardware									Arduino Mega (2560)
-
+// Hardware Cube 							Rev3
 
 #ifndef LEDCUBE8_H
 #define LEDCUBE8_H
 #include "Arduino.h"
-	struct CUBEDATALAYER
-{
-  byte Layer;
-  byte A; 
-  byte B; 
-  byte C; 
-  byte D; 
-  byte E; 
-  byte F; 
-  byte G; 
-  byte H; 
-};
+#include <Wire.h>
+
+#define readFromSD
+
 	struct CUBEDATACUBE
 {
   byte CA8; 
@@ -96,12 +88,6 @@
   byte CG1; 
   byte CH1; 
 };
-	struct POS
-{
-  int X;
-  int Y;
-  int Z;
-};
 
 
 class LedCube8
@@ -109,6 +95,10 @@ class LedCube8
 	public:
 		 LedCube8();
 		 ~LedCube8();
+		
+		//------SD
+		struct CUBEDATACUBE readSD();
+		//------SD
 		
 		void rotate90(int count,struct CUBEDATACUBE data);
 		void rotate(int count,struct CUBEDATACUBE data);
@@ -126,15 +116,7 @@ class LedCube8
 		struct CUBEDATACUBE getCube();
 		struct CUBEDATACUBE getLayer(byte layer);
 		struct CUBEDATACUBE getWall(byte wall);
-		struct CUBEDATACUBE getWall90(byte wall);
-			
-		struct CUBEDATALAYER getShiftLayerRight  (int count,bool reload, struct CUBEDATALAYER data);
-		struct CUBEDATALAYER getShiftLayerLeft   (int count,bool reload, struct CUBEDATALAYER data);
-		struct CUBEDATALAYER getShiftLayerRight90(int count,bool reload, struct CUBEDATALAYER data);
-		struct CUBEDATALAYER getShiftLayerLeft90 (int count,bool reload, struct CUBEDATALAYER data);
-		struct CUBEDATALAYER getShiftLayerDown   (int count,bool reload, struct CUBEDATALAYER data);
-		struct CUBEDATALAYER getShiftLayerUp 	(int count,bool reload, struct CUBEDATALAYER data);
-		
+		struct CUBEDATACUBE getWall90(byte wall);	
 		struct CUBEDATACUBE getShiftCubeRight	(int count,bool reload, struct CUBEDATACUBE data);
 		struct CUBEDATACUBE getShiftCubeLeft	(int count,bool reload, struct CUBEDATACUBE data);
 		struct CUBEDATACUBE getShiftCubeRight90	(int count,bool reload, struct CUBEDATACUBE data);
@@ -144,21 +126,12 @@ class LedCube8
 	 
 		 //----------------------------------------------
 		void init();
-		void draw(struct CUBEDATALAYER data);
 		void drawCube(struct CUBEDATACUBE data);
 	
 		
 		void drawLayer(byte layer);
 		void drawWall(byte wall);
-		void drawWall90(byte wall);
-		
-		void shiftLayerRight    (int count,bool reload, struct CUBEDATALAYER data);
-		void shiftLayerLeft    (int count,bool reload, struct CUBEDATALAYER data);
-		void shiftLayerRight90  (int count,bool reload, struct CUBEDATALAYER data);
-		void shiftLayerLeft90  (int count,bool reload, struct CUBEDATALAYER data);
-		void shiftLayerDown (int count,bool reload, struct CUBEDATALAYER data);
-		void shiftLayerUp 	(int count,bool reload, struct CUBEDATALAYER data);
-		
+		void drawWall90(byte wall);	
 		void shiftCubeRight		(int count,bool reload, struct CUBEDATACUBE data);
 		void shiftCubeLeft		(int count,bool reload, struct CUBEDATACUBE data);
 		void shiftCubeRight90	(int count,bool reload, struct CUBEDATACUBE data);
@@ -180,15 +153,7 @@ class LedCube8
 	
 		struct CUBEDATACUBE calculateDrawLayer(byte layer);
 		struct CUBEDATACUBE calculateDrawWall(byte wall);
-		struct CUBEDATACUBE calculateDrawWall90(byte wall);
-			
-		struct CUBEDATALAYER calculateShiftLayerRight    (int count,bool reload, struct CUBEDATALAYER data);
-		struct CUBEDATALAYER calculateShiftLayerLeft    (int count,bool reload, struct CUBEDATALAYER data);
-		struct CUBEDATALAYER calculateShiftLayerRight90  (int count,bool reload, struct CUBEDATALAYER data);
-		struct CUBEDATALAYER calculateShiftLayerLeft90  (int count,bool reload, struct CUBEDATALAYER data);
-		struct CUBEDATALAYER calculateShiftLayerDown (int count,bool reload, struct CUBEDATALAYER data);
-		struct CUBEDATALAYER calculateShiftLayerUp 	(int count,bool reload, struct CUBEDATALAYER data);
-				
+		struct CUBEDATACUBE calculateDrawWall90(byte wall);		
 		struct CUBEDATACUBE calculateShiftCubeRight		(int count,bool reload, struct CUBEDATACUBE data);
 		struct CUBEDATACUBE calculateShiftCubeLeft		(int count,bool reload, struct CUBEDATACUBE data);
 		struct CUBEDATACUBE calculateShiftCubeRight90	(int count,bool reload, struct CUBEDATACUBE data);
@@ -197,26 +162,18 @@ class LedCube8
 		struct CUBEDATACUBE calculateShiftCubeDown	(int count,bool reload, struct CUBEDATACUBE data);
 		
 		
+		void resetICs();
+		void setICs(byte data1,byte data2,byte data3,byte data4,byte data5,byte data6,byte data7,byte data8,byte layer);
+		
+		byte IC_OE;
+		byte IC_C2;
+		byte IC_RESET;
+		byte IC_C1;
+		byte *IC_SERIAL;
 		
 		
 		
 		
-		
-		
-		byte countAddress();								//zählt "counter" um 1 hoch
-		void setPin(byte pin, byte address);				//setzt pins bei den pins 2-9
-		void saveToFlipFlop(byte address);					//setzt pins in Binär bei 10-13
-		void setLayer(byte layer);	//setzt pins in Binär bei A0-A4
-		
-		byte *ledpin;
-		byte *ledAddresspin;
-		byte *layerpin;
-		
-		byte led;
-		byte ledAddress;
-		byte layerAddress;
-		
-		byte counter;
 		byte helligkeit;
 		unsigned long Time;
 		

@@ -1,0 +1,17 @@
+TIMER
+
+Funktionen:
+
+					Timer();											//Instanzieren
+					~Timer();											//Destruktor
+			void	init();												//Inizialisieren
+			void	update();											//Zähler aktualisieren
+			void 	start(unsigned int zeit,void Funktionsname);		//Startet den Timer mit der Zeit "zeit" als unsigned int in milli sek. "Funktionsname" wird ausgeführt wenn die Zeit erreicht wird.
+unsigned 	int 	getRuntime();										//Gibt die vergangene Zeit in milli sek. zurück.
+			void 	reset();											//Stopt den Timer und löscht "zeit" und "Funktionsname".
+
+			
+
+
+
+

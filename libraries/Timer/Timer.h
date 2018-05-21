@@ -1,24 +1,28 @@
 //	Autor	Alex Krieg
-//	Version	2.1
-//	Datum 	19.05.2018
+//	Version	2.2
+//	Datum 	21.05.2018
 
 #ifndef TIMER_H
 #define TIMER_H
 
 #include "Arduino.h"
-
+#define TMicros 1
+#define TMillis 0
 class Timer
 {
 	public:
-	Timer(bool Micros = 0);
+	Timer(bool Micros = TMillis);
 	~Timer();
 	
 	bool update();
 	bool start(unsigned long timeOfDelayIn = 0);
-	void stop();
+	unsigned long stop();
 
-	void on_timeout(void (*p_func)());
-	unsigned int runtime();
+	void onFinished(void (*p_func)());
+	unsigned long runtime();
+	
+	void autoRestart(bool autoRestart);
+	bool isRunning();
 	
 	private:
 	void reset();
@@ -26,10 +30,12 @@ class Timer
 	
 	
 	
-	unsigned int benoetigteZeit;
+	unsigned long benoetigteZeit;
 	unsigned long startZeit;
 	unsigned long vergangeneZeit;
 	bool doMicros;
+	bool _autoRestart;
+	bool _hasFinished;
 	//bool doStopWatch;
 	
 	boolean runState;

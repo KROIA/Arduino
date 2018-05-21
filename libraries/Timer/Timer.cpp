@@ -1,6 +1,6 @@
 //	Autor	Alex Krieg
-//	Version	2.1
-//	Datum 	19.05.2018
+//	Version	2.2
+//	Datum 	21.05.2018
 
 #include "Timer.h"
 
@@ -9,6 +9,8 @@ Timer::Timer(bool Micros)
 {
 	p_fctTimerEnd = NULL;
 	doMicros = Micros;
+	_autoRestart = false;
+	_hasFinished = false;
 	this->reset();
 }
 Timer::~Timer()
@@ -18,7 +20,10 @@ Timer::~Timer()
 void Timer::reset()
 {
 	runState		= false;
-	benoetigteZeit	= 0;
+	if(!_autoRestart)
+	{
+		benoetigteZeit	= 0;
+	}
 	startZeit		= 0;
 	if(doMicros)
 	{
@@ -29,11 +34,14 @@ void Timer::reset()
 		vergangeneZeit	= millis();
 	}
 	startZeit 		= vergangeneZeit;
+	if(_autoRestart)
+	{
+		this->start(benoetigteZeit);
+	}
 }
 bool Timer::update()
 {
-	
-	if(runState == true)
+	if(runState)
 	{
 		
 		if(doMicros)
@@ -46,9 +54,10 @@ bool Timer::update()
 		}
 		if(((vergangeneZeit - startZeit) > benoetigteZeit) && benoetigteZeit != 0)
 		{
-			this->reset();
 			if(p_fctTimerEnd != NULL)
 			{
+				this->stop();
+				_hasFinished = true;
 				(*p_fctTimerEnd)();
 			}
 			return true;
@@ -73,20 +82,35 @@ bool Timer::start(unsigned long timeOfDelayIn)
 		{
 			startZeit	= millis();
 		}
-		
 	}
 	benoetigteZeit 	= timeOfDelayIn;
-	return this->update();
+	if(this->update() || _hasFinished)
+	{
+		_hasFinished = false;
+		this->stop();
+		return true;
+	}
+	return false;
 }
-void Timer::stop()
+unsigned long  Timer::stop()
 {
+	unsigned long runtime = this->runtime();
 	this->reset();
+	return runtime;
 }
-void Timer::on_timeout(void (*p_func)())
+void Timer::onFinished(void (*p_func)())
 {
 	p_fctTimerEnd 	= p_func;
 }
-unsigned int Timer::runtime()
+unsigned long Timer::runtime()
 {
 	return vergangeneZeit - startZeit;
+}
+void Timer::autoRestart(bool autoRestart)
+{
+	_autoRestart = autoRestart;
+}
+bool Timer::isRunning()
+{
+	return runState;
 }

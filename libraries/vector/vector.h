@@ -1,5 +1,5 @@
 //	Autor	Alex Krieg
-//	Version	0.0
+//	Version	0.1
 //	Datum 	21.05.2018
 
 
@@ -209,7 +209,7 @@ void Vector<T>::resize(unsigned int size)
 template <typename T >
 void Vector<T>::erase(unsigned int pos,unsigned int amount)
 {
-	
+	if(amount == 0){return;}
 	if(pos<arraySize)
 	{
 		if(pos+amount > arraySize){amount = arraySize-pos;}

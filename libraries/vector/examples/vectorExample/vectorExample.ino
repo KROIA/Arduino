@@ -22,19 +22,25 @@ void setup() {
   
   // Predefine a size of the Array "3" and initialize it to the value "2"
   Vector<int> secondVector(3,2); // Make a new Vector instance of int's
+
   secondVector.push_back(10); // Fill in some numbers in the array
   secondVector.push_back(11);
   secondVector.push_back(12);
-  
-// [1][2][3] += [10][11][12] =  [1][2][3][10][11][12]
+  Serial.println("resize: ");
+  secondVector.resize(10);
+  Serial.print("size: ");
+  Serial.println(secondVector.size());
+  Serial.print("cap: ");
+  Serial.println(secondVector.capacity());
+// [1][2][3] += [2][2][2][10][11][12] =  [1][2][3][2][2][2][10][11][12]
    int_list  += secondVector;   // Add the secondVector to the int_list;
   
    printAllElements();           // Prints all elements to the console
   
-//     [1][2][3][10][11][12]
-//pos   0  1 (2--3---4)  5
-//     [1][2]           [12] 
-//     [1][2][3]
+//     [1][2][3][2][2][2][10][11][12]
+//pos   0  1 (2--3--4) 5  6   7   8
+//     [1][2]         [2][10][11][12] 
+//     [1][2][2][10][11][12] 
   int_list.erase(2,3);          // Delete form pos 2, 3 elements
   
   printAllElements();           // Prints all elements to the console

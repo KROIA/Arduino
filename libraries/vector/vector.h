@@ -5,7 +5,6 @@
 
 #ifndef VECTOR_H
 #define VECTOR_H
-#include "Arduino.h"
 
 template <typename T >
 class Vector
@@ -45,8 +44,6 @@ Vector<T>::Vector()
 template <typename T >
 Vector<T>::Vector(unsigned int size,T value)
 {
-	Serial.println("sadad");
-	Serial.println(value);
 	arraySize = 0;
 	this->resize(size);
 	arraySize = size;

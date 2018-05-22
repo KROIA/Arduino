@@ -10,7 +10,7 @@ template <typename T >
 class Vector
 {
 	public:
-		Vector();
+		Vector(unsigned int size);
 		~Vector();
 		T& operator[](unsigned int pos);
 		Vector &operator=(const Vector<T> &vec);
@@ -34,11 +34,10 @@ class Vector
 
 
 template <typename T >
-Vector<T>::Vector()
+Vector<T>::Vector(unsigned int size)
 {
 	arraySize = 0;
-	_capacity = 0;
-	value = new T[arraySize];
+	this->resize(size);
 }
 template <typename T >
 Vector<T>::~Vector()

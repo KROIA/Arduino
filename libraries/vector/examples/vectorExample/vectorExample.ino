@@ -20,7 +20,8 @@ void setup() {
   // now the array size is 3
   printAllElements();         // Prints all elements to the console
   
-  Vector<int> secondVector;   // Make a new Vector instance of int's
+  // Predefine a size of the Array "3" and initialize it to the value "2"
+  Vector<int> secondVector(3,2); // Make a new Vector instance of int's
   secondVector.push_back(10); // Fill in some numbers in the array
   secondVector.push_back(11);
   secondVector.push_back(12);
@@ -28,7 +29,7 @@ void setup() {
 // [1][2][3] += [10][11][12] =  [1][2][3][10][11][12]
    int_list  += secondVector;   // Add the secondVector to the int_list;
   
-  printAllElements();           // Prints all elements to the console
+   printAllElements();           // Prints all elements to the console
   
 //     [1][2][3][10][11][12]
 //pos   0  1 (2--3---4)  5
@@ -38,7 +39,9 @@ void setup() {
   
   printAllElements();           // Prints all elements to the console
   
+  int_list.clear();          // Delete form pos 2, 3 elements
   
+  printAllElements();           // Prints all elements to the console
 }
 
 void loop() {
@@ -56,12 +59,12 @@ void printAllElements()
     Serial.print("position ");
     Serial.print(a);
     Serial.print(" is: \t");
-    Serial.println(int_list[a]);          // Gets the element a of the array
-                                          // int_list[1] -> [1][2][3]
-                                          //                    |
+    Serial.println(int_list[a]);               // Gets the element a of the array
+                                          // vec[1] -> [1][2][3]
+                                          //               |
                                           //
-                                          // int_list[0] -> [1][2][3]
-                                          //                 |
+                                          // vec[0] -> [1][2][3]
+                                          //            |
   }
   Serial.println("------------");
 }

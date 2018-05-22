@@ -5,12 +5,14 @@
 
 #ifndef VECTOR_H
 #define VECTOR_H
+#include "Arduino.h"
 
 template <typename T >
 class Vector
 {
 	public:
 		Vector();
+		Vector(unsigned int size,T value);
 		~Vector();
 		T& operator[](unsigned int pos);
 		Vector &operator=(const Vector<T> &vec);
@@ -21,8 +23,10 @@ class Vector
 		unsigned int capacity();
 		void resize(unsigned int size);
 		void erase(unsigned int pos,unsigned int amount = 1);
+		void clear();
 		T* begin();
 		T* end();
+		
 	
 	private:
 		T* value;
@@ -32,13 +36,24 @@ class Vector
 
 
 
-
 template <typename T >
 Vector<T>::Vector()
 {
 	arraySize = 0;
-	_capacity = 0;
-	value = new T[arraySize];
+	this->resize(arraySize);
+}
+template <typename T >
+Vector<T>::Vector(unsigned int size,T value)
+{
+	Serial.println("sadad");
+	Serial.println(value);
+	arraySize = 0;
+	this->resize(size);
+	arraySize = size;
+	for(unsigned int a=0; a<arraySize; a++)
+	{
+		this->value[a] = value;
+	}
 }
 template <typename T >
 Vector<T>::~Vector()
@@ -190,6 +205,7 @@ void Vector<T>::resize(unsigned int size)
 	{
 		value[a] = newVal[a];
 	}	
+
 	
 	delete[] newVal;
 }
@@ -223,6 +239,17 @@ void Vector<T>::erase(unsigned int pos,unsigned int amount)
 		arraySize = newSize;
 		delete[] newVal;
 	}
+}
+template <typename T >
+void Vector<T>::clear()
+{
+	if(arraySize == _capacity)
+	{
+		_capacity = 0;
+	}
+	arraySize = 0;
+	delete[] value;
+	value = new T[arraySize];
 }
 template <typename T >
 T* Vector<T>::begin()

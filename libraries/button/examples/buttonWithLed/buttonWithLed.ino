@@ -1,21 +1,19 @@
 #include "button.h"
 #include "led.h"
+#include "Timer.h"
 
 Led led(13);
-Button button(4, activeLow);
+Button button(4);
 
+void toggleLed();
 void setup()
 { 
-  led.init(); 
-  button.initWithInternalPullup();
   button.OnBothButtonEdges(toggleLed);
 }
 
 void loop() 
 {
-  button.checkButton();
-  // wait 20ms for debounce
-  delay(20);
+  button.update();
 }
 
 void toggleLed()

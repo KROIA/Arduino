@@ -1,20 +1,25 @@
+/*
+Autor:	 	Alex Krieg
+Datum:		24.05.2018
+Version:	1.0.0
+*/
+
 #ifndef BUTTON_H
 #define BUTTON_H
 
 #include "Arduino.h"
 
-#define activeLow true
-#define activeHigh false
+#define activeLow false
+#define activeHigh true
 
 class Button
 {
 
  public:
 
-  Button(int pinNr, boolean logicLevel);
+  Button(int pinNr, boolean logicLevel = activeHigh);
   ~Button();
-  void init();
-  void initWithInternalPullup();
+  void update();
 
   void OnPressedEdge(void (*p_func)());
   void OnReleasedEdge(void (*p_func)());
@@ -22,15 +27,16 @@ class Button
   void IsPressedHigh(void (*p_func)());
   void IsPressedLow(void (*p_func)());
 
-  virtual boolean getValue();
-  void checkButton();
+  bool getValue();
+  
   int getPin();
 
  private:
 
   int pin;
-  boolean isActiveLow;
-  boolean state;
+  bool activeLogicState;
+  bool state;
+  bool lastState;
   void (*p_fctButtonChanged)(void);
   void (*p_fctButtonPressed)(void);
   void (*p_fctButtonReleased)(void);

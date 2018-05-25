@@ -1,7 +1,7 @@
 /*
 Autor:	 	KRIA
-Datum:		16.4.2018
-Version:	1.0.2
+Datum:		25.5.2018
+Version:	1.0.3
 
 NOTE:
 

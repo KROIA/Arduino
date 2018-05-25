@@ -1,7 +1,7 @@
 /*
 Autor:	 	KRIA
-Datum:		16.4.2018
-Version:	1.0.2
+Datum:		25.5.2018
+Version:	1.0.3
 */
 #include "A3144.h"
 
@@ -12,6 +12,10 @@ A3144::A3144(byte pin,bool activeHigh){
 	//_rpm				= 0.0;
 	_ticksPerRevolution = 1;
 	pinMode(pin,INPUT);
+	p_fctChanged 		= NULL;
+	p_fctTriggerHigh 	= NULL;
+	p_fctTriggerLow 	= NULL;
+	p_fctHigh		 	= NULL;
 	this->reset();
 	
 }
@@ -108,13 +112,10 @@ float A3144::rpm(){
 	return _rpm;
 }
 bool A3144::state(){
-	return _state;
+	return !(_state ^ activeHigh);
 }
 void A3144::reset(){
-	p_fctChanged 		= NULL;
-	p_fctTriggerHigh 	= NULL;
-	p_fctTriggerLow 	= NULL;
-	p_fctHigh		 	= NULL;
+	
 	_state	 			= !activeHigh;
 	_lastState 			= !activeHigh;
 	_rpm				= 0.0;

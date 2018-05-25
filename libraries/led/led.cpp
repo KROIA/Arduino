@@ -1,5 +1,5 @@
 /*
-Autor:	 	© by Alex Krieg
+Autor:	    Alex Krieg
 Datum:		19.3.2018
 Version:	1.0.0
 */
@@ -12,7 +12,7 @@ Led::Led(int pinNr)
   pin 		= pinNr;
   ledIsOn 	= false;
   blinking	= false;
-  _blinkIntervall = 1000;
+  _blinkinterval = 1000;
   
   
   pinMode(pin, OUTPUT);
@@ -27,7 +27,7 @@ void Led::update()
 {
 	if(blinking)
 	{
-		if(blinkTimer->start(_blinkIntervall))
+		if(blinkTimer->start(_blinkinterval))
 		{
 			this->toggle();
 		}
@@ -49,10 +49,10 @@ void Led::toggle()
 {
   ledIsOn ? off() : on();
 }
-void Led::blinkOn(unsigned int intervall)
+void Led::blinkOn(unsigned int interval)
 {
 	blinking = true;
-	blinkIntervall(intervall);
+	blinkinterval(interval);
 }
 void Led::blinkOff()
 {
@@ -60,7 +60,7 @@ void Led::blinkOff()
 	blinking = false;
 	blinkTimer->stop();
 }
-void Led::blinkToggle(unsigned int intervall)
+void Led::blinkToggle(unsigned int interval)
 {
 	if(blinking)
 	{
@@ -68,16 +68,16 @@ void Led::blinkToggle(unsigned int intervall)
 	}
 	else
 	{
-		blinkOn(intervall);
+		blinkOn(interval);
 	}
 }
-void Led::blinkIntervall(unsigned int intervall)
+void Led::blinkinterval(unsigned int interval)
 {
-	_blinkIntervall = intervall;
+	_blinkinterval = interval;
 }
-unsigned int Led::blinkIntervall()
+unsigned int Led::blinkinterval()
 {
-	return _blinkIntervall;
+	return _blinkinterval;
 }
 bool Led::isOn()
 {

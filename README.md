@@ -2,6 +2,7 @@
 # **Libraries**
 ## [WIKI](https://github.com/KROIA/Arduino/wiki)
 ### [Installation](https://github.com/KROIA/Arduino/wiki/Installation)
+### [Event system](https://github.com/KROIA/Arduino/wiki/Events)
 ***
 * [Timer](https://github.com/KROIA/Arduino/wiki/Timer)
 * [Vector](https://github.com/KROIA/Arduino/wiki/Vector)

@@ -52,7 +52,7 @@ void Led::toggle()
 void Led::blinkOn(unsigned int interval)
 {
 	blinking = true;
-	blinkinterval(interval);
+	blinkInterval(interval);
 }
 void Led::blinkOff()
 {
@@ -71,11 +71,11 @@ void Led::blinkToggle(unsigned int interval)
 		blinkOn(interval);
 	}
 }
-void Led::blinkinterval(unsigned int interval)
+void Led::blinkInterval(unsigned int interval)
 {
 	_blinkinterval = interval;
 }
-unsigned int Led::blinkinterval()
+unsigned int Led::blinkInterval()
 {
 	return _blinkinterval;
 }

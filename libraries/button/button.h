@@ -9,15 +9,18 @@ Version:	1.0.0
 
 #include "Arduino.h"
 
-#define activeLow false
-#define activeHigh true
+#define activeLow 3
+#define activeHigh 4
+#define pullup 2
+#define PULLUP 2
 
 class Button
 {
 
  public:
 
-  Button(int pinNr, boolean logicLevel = activeHigh);
+  Button(int pinNr);
+  Button(int pinNr, unsigned int logicLevel);
   ~Button();
   void update();
 
@@ -33,6 +36,7 @@ class Button
 
  private:
 
+  void setup(int pinNr, unsigned int logicLevel);
   int pin;
   bool activeLogicState;
   bool state;
@@ -42,7 +46,6 @@ class Button
   void (*p_fctButtonReleased)(void);
   void (*p_fctButtonIsPressedHigh)(void);
   void (*p_fctButtonIsPressedLow)(void);
-
 };
 
 #endif // BUTTON_H

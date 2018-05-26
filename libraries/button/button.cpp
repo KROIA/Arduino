@@ -5,19 +5,34 @@ Version:	1.0.0
 */
 #include "button.h"
 
-Button::Button(int pinNr, boolean logicLevel)
+Button::Button(int pinNr)
+{
+  this->setup(pinNr,activeHigh);
+}
+Button::Button(int pinNr, unsigned int logicLevel)
+{
+  this->setup(pinNr,logicLevel);
+}
+void Button::setup(int pinNr, unsigned int logicLevel)
 {
   pin 						= pinNr;
-  activeLogicState			= logicLevel;
-  
+  if(logicLevel  	 == activeLow)
+  {activeLogicState			= false;}
+  else if(logicLevel == activeHigh)
+  {activeLogicState			= true;}
+  else if(logicLevel == INPUT_PULLUP)
+  {activeLogicState			= false;}
+
   p_fctButtonChanged  		= NULL;
   p_fctButtonPressed  		= NULL;
   p_fctButtonReleased 		= NULL;
   p_fctButtonIsPressedHigh 	= NULL;
   p_fctButtonIsPressedLow 	= NULL;
   lastState 				= false;
-
-  pinMode(pin, INPUT);
+  if(logicLevel == INPUT_PULLUP)
+	pinMode(pin, INPUT_PULLUP);
+  else
+	pinMode(pin, INPUT);
   this->update();
 }
 
@@ -26,7 +41,7 @@ Button::~Button()
 
 }
 
-boolean Button::getValue()
+bool Button::getValue()
 {
   return digitalRead(pin);
 }

@@ -1,7 +1,7 @@
 /*
 Autor:	 	Alex Krieg
-Datum:		19.3.2018
-Version:	1.0.0
+Datum:		12.06.2018
+Version:	1.0.1
 */
 
 
@@ -30,6 +30,7 @@ class Led
   void blinkToggle(unsigned int interval);
   void blinkInterval(unsigned int interval);
   unsigned int blinkInterval();
+  
   bool isOn();
   bool isBlinking();
 
@@ -39,7 +40,7 @@ class Led
   bool ledIsOn;
   bool blinking;
   Timer *blinkTimer;
-  unsigned int _blinkinterval;
+  unsigned int _blinkInterval;
 };
 
 #endif // LED_H

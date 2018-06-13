@@ -10,3 +10,4 @@
 * [Led](https://github.com/KROIA/Arduino/wiki/Led)
 * [NTC B57164](https://github.com/KROIA/Arduino/wiki/NTC-B57164)
 * [A3144 Hall Sensor](https://github.com/KROIA/Arduino/wiki/A3144HallSensor)
+* [IR_sensor](https://github.com/KROIA/Arduino/wiki/IR_sensor)

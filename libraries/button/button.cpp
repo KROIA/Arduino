@@ -23,12 +23,13 @@ void Button::setup(int pinNr, unsigned int logicLevel)
   else if(logicLevel == INPUT_PULLUP)
   {activeLogicState			= false;}
 
+  lastState 			   != activeLogicState;
   p_fctButtonChanged  		= NULL;
   p_fctButtonPressed  		= NULL;
   p_fctButtonReleased 		= NULL;
   p_fctButtonIsPressedHigh 	= NULL;
   p_fctButtonIsPressedLow 	= NULL;
-  lastState 				= false;
+  
   if(logicLevel == INPUT_PULLUP)
 	pinMode(pin, INPUT_PULLUP);
   else

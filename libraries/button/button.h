@@ -1,7 +1,7 @@
 /*
 Autor:	 	Alex Krieg
-Datum:		24.05.2018
-Version:	1.0.0
+Datum:		18.06.2018
+Version:	1.0.1
 */
 
 #ifndef BUTTON_H

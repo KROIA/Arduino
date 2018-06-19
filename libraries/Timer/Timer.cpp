@@ -1,6 +1,6 @@
 //	Autor	Alex Krieg
-//	Version	2.2
-//	Datum 	21.05.2018
+//	Version	2.3
+//	Datum 	19.06.2018
 
 #include "Timer.h"
 
@@ -10,7 +10,6 @@ Timer::Timer(bool Micros)
 	p_fctTimerEnd = NULL;
 	doMicros = Micros;
 	_autoRestart = false;
-	_hasFinished = false;
 	this->reset();
 }
 Timer::~Timer()
@@ -57,7 +56,6 @@ bool Timer::update()
 			if(p_fctTimerEnd != NULL)
 			{
 				this->stop();
-				_hasFinished = true;
 				(*p_fctTimerEnd)();
 			}
 			return true;
@@ -84,9 +82,8 @@ bool Timer::start(unsigned long timeOfDelayIn)
 		}
 	}
 	benoetigteZeit 	= timeOfDelayIn;
-	if(this->update() || _hasFinished)
+	if(this->update())
 	{
-		_hasFinished = false;
 		this->stop();
 		return true;
 	}

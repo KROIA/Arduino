@@ -1,6 +1,6 @@
 //	Autor	Alex Krieg
-//	Version	2.2
-//	Datum 	21.05.2018
+//	Version	2.3
+//	Datum 	19.06.2018
 
 #ifndef TIMER_H
 #define TIMER_H
@@ -35,8 +35,6 @@ class Timer
 	unsigned long vergangeneZeit;
 	bool doMicros;
 	bool _autoRestart;
-	bool _hasFinished;
-	//bool doStopWatch;
 	
 	boolean runState;
 };

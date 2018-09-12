@@ -26,7 +26,6 @@ class Vector
 		T* begin();
 		T* end();
 		
-	
 	private:
 		T* value;
 		unsigned int arraySize;

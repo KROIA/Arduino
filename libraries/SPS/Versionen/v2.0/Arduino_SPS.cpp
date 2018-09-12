@@ -1,7 +1,7 @@
 /*
 	Autor	Alex Krieg
-	Version 2.1
-	Datum 	4.07.2018
+	Version 2.0
+	Datum 	29.01.2018
 */
 
 

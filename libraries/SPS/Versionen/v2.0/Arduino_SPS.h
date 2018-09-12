@@ -1,7 +1,7 @@
 /*
 	Autor	Alex Krieg
-	Version 2.1
-	Datum 	4.07.2018
+	Version 2.0
+	Datum 	29.01.2018
 */
 
 #ifndef ARDUINO_SPS_H
@@ -12,14 +12,14 @@
 #include "LS165.h"	//Version 1.0
 #include "HC595.h"	//Version 1.0
 
-struct IN{
+/*struct IN{
  byte pin;				//Adresse
  bool value; 			//Wert 0-1
 };
 struct OUT{
  byte pin;				//Adresse
  bool value; 			//Wert 0-1
-};
+};*/
 typedef void (*onInputChangeFunction)(bool);
 typedef void (*onInputRisingFunction)();
 typedef void (*onInputFallingFunction)();

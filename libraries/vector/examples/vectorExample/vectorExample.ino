@@ -1,5 +1,4 @@
 #include <vector.h>
-
 Vector<int> int_list;          // Make a Vector instance of int's
 void setup() {
   Serial.begin(9600);
@@ -11,14 +10,17 @@ void setup() {
   int_list.push_back(4);
 //------------------------------  
   // the array size is 4
-  printAllElements();         // Prints all elements to the console
+  printAllElements(int_list);         // Prints all elements to the console
   
   int lastElement = int_list.pop_back();  // Gets the last element from the array back and deletes the last place in the array
   Serial.print("last element was:\t");
   Serial.println(lastElement);
+  lastElement = int_list.pop_back();  // Gets the last element from the array back and deletes the last place in the array
+  Serial.print("last element was:\t");
+  Serial.println(lastElement);
   
   // now the array size is 3
-  printAllElements();         // Prints all elements to the console
+  printAllElements(int_list);         // Prints all elements to the console
   
   // Predefine a size of the Array "3" and initialize it to the value "2"
   Vector<int> secondVector(3,2); // Make a new Vector instance of int's
@@ -35,7 +37,7 @@ void setup() {
 // [1][2][3] += [2][2][2][10][11][12] =  [1][2][3][2][2][2][10][11][12]
    int_list  += secondVector;   // Add the secondVector to the int_list;
   
-   printAllElements();           // Prints all elements to the console
+   printAllElements(int_list);           // Prints all elements to the console
   
 //     [1][2][3][2][2][2][10][11][12]
 //pos   0  1 (2--3--4) 5  6   7   8
@@ -43,29 +45,30 @@ void setup() {
 //     [1][2][2][10][11][12] 
   int_list.erase(2,3);          // Delete form pos 2, 3 elements
   
-  printAllElements();           // Prints all elements to the console
+  printAllElements(int_list);           // Prints all elements to the console
   
   int_list.clear();          // Delete form pos 2, 3 elements
   
-  printAllElements();           // Prints all elements to the console
+  printAllElements(int_list);           // Prints all elements to the console
 }
 
 void loop() {
   
 }
 
-void printAllElements()
+void printAllElements(Vector<int> &vec)
 {
   Serial.println("------------");
   Serial.print("\nArray size:      \t");
-  Serial.println(int_list.size());        // Gets the size of the array
+  Serial.println(vec.size());        // Gets the size of the array
   Serial.println();
-  for(int a=0; a<int_list.size(); a++)
+  for(int a=0; a<vec.size(); a++)
   {
     Serial.print("position ");
     Serial.print(a);
     Serial.print(" is: \t");
-    Serial.println(int_list[a]);               // Gets the element a of the array
+    //a = vec[0][a];
+    Serial.println(vec[a]);               // Gets the element a of the array
                                           // vec[1] -> [1][2][3]
                                           //               |
                                           //

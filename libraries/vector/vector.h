@@ -14,7 +14,7 @@ class Vector
         Vector(unsigned int size,T value);
 		~Vector();
 		T& operator[](unsigned int pos);
-		Vector &operator=(const Vector<T> &vec);
+        Vector &operator=(Vector<T> &vec);
         Vector &operator+=(Vector<T> &vec);
 		void push_back(T element);
         T pop_back();
@@ -67,7 +67,7 @@ T& Vector<T>::operator[](unsigned int pos)
     return value[pos % arraySize];
 }
 template <typename T >
-Vector<T>& Vector<T>::operator=(const Vector<T> &vec)
+Vector<T>& Vector<T>::operator=(Vector<T> &vec)
 {
     arraySize = vec.arraySize;
     _capacity = vec._capacity;

@@ -1,22 +1,21 @@
-#include "Timer.h"
 #include "A3144.h"
-A3144 hall(A0);
-Timer timer;
-bool _switch = false;
+
+
+A3144 hall(A0);          //Make an instance of A3144 on Pin A0
+
+void change(bool state);
+void high();
+void low();
+
 void setup() {
   Serial.begin(9600);
-  hall.OnChange(change);
-  hall.OnTriggerHigh(high);
-  hall.OnTriggerLow(low);
+  hall.OnChange(change);     //Define function which is executed when a change occurs
+  hall.OnTriggerHigh(high);  //Define function which is executed when a rising flank occurs
+  hall.OnTriggerLow(low);    //Define function which is executed when a sinking flank occurs
 }
 
 void loop() {
-  hall.update();  
-  if(timer.start(100))
-  {
-    Serial.print("rpm: ");
-    Serial.println(hall.rpm());
-  }
+  hall.update();  				 //Read the sensor
 }
 void change(bool state)
 {

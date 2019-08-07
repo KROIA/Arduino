@@ -1,7 +1,7 @@
 /*
 Autor:	 	Alex Krieg
-Datum:		18.06.2018
-Version:	1.0.1
+Datum:		11.07.2018
+Version:	1.0.2
 */
 
 #ifndef BUTTON_H
@@ -29,6 +29,7 @@ class Button
   void OnBothButtonEdges(void (*p_func)());
   void IsPressedHigh(void (*p_func)());
   void IsPressedLow(void (*p_func)());
+  void getPulseLength(void (*p_func)(unsigned int));
 
   bool getValue();
   
@@ -41,11 +42,15 @@ class Button
   bool activeLogicState;
   bool state;
   bool lastState;
+  unsigned int pulseLength;
+  unsigned long startTime;
+  
   void (*p_fctButtonChanged)(void);
   void (*p_fctButtonPressed)(void);
   void (*p_fctButtonReleased)(void);
   void (*p_fctButtonIsPressedHigh)(void);
   void (*p_fctButtonIsPressedLow)(void);
+  void (*p_fctGetPulseLength)(unsigned int);
 };
 
 #endif // BUTTON_H

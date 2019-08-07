@@ -1,7 +1,7 @@
 /*
 Autor:	 	Alex Krieg
-Datum:		18.06.2018
-Version:	1.0.1
+Datum:		11.07.2018
+Version:	1.0.2
 */
 #include "button.h"
 
@@ -29,6 +29,10 @@ void Button::setup(int pinNr, unsigned int logicLevel)
   p_fctButtonReleased 		= NULL;
   p_fctButtonIsPressedHigh 	= NULL;
   p_fctButtonIsPressedLow 	= NULL;
+  p_fctGetPulseLength		= NULL;
+  
+  pulseLength 				= 0;
+  startTime					= 0;
   
   if(logicLevel == INPUT_PULLUP)
 	pinMode(pin, INPUT_PULLUP);
@@ -76,6 +80,7 @@ void Button::update()
     {
       if(!activeLogicState)
       {
+		startTime = micros();
         if(p_fctButtonPressed != NULL)
         {
           (*p_fctButtonPressed)();
@@ -83,9 +88,14 @@ void Button::update()
       }
       else
       {
+		pulseLength = micros() - startTime;
         if(p_fctButtonReleased != NULL)
         {
           (*p_fctButtonReleased)();
+        }
+		if(p_fctGetPulseLength != NULL)
+        {
+          (*p_fctGetPulseLength)(pulseLength);
         }
       }
     }
@@ -93,13 +103,19 @@ void Button::update()
     {
       if(!activeLogicState)
       {
+		pulseLength = micros() - startTime;
         if(p_fctButtonReleased != NULL)
         { 
           (*p_fctButtonReleased)();
         }
+		if(p_fctGetPulseLength != NULL)
+        {
+          (*p_fctGetPulseLength)(pulseLength);
+        }
       }
       else
       {
+		startTime = micros();
         if(p_fctButtonPressed != NULL)
         { 
           (*p_fctButtonPressed)();
@@ -140,5 +156,8 @@ void Button::IsPressedLow(void (*p_func)())
   p_fctButtonIsPressedLow = p_func;
 }
 
-
+void Button::getPulseLength(void (*p_func)(unsigned int))
+{
+	p_fctGetPulseLength = p_func;
+}
 

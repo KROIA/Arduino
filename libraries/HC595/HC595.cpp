@@ -64,37 +64,44 @@ void HC595::write()
 {
 	shiftOut();
 }
-void HC595::write(const byte &modul,const byte &data)
+void HC595::write(byte modul, byte data)
 {
 	set(modul,data);
 	shiftOut();
 }
-void HC595::write(const byte *data)
+void HC595::write(byte *data)
 {
 	set(data);
 	shiftOut();
 }
-byte HC595::get(const byte &modul)
+byte HC595::get(byte modul)
 {
 	if(modul >= _amount || modul < 0)
-		return 0;
+	{
+		modul = 0;
+	}
 	return data[modul];
 }
 byte *HC595::get()
 {
 	return data;
 }
-void HC595::set(const byte &modul,const byte &data)
+void HC595::set(byte modul,byte data)
 {
 	if(modul >= _amount || modul < 0)
-		return;
+	{
+		modul = 0;
+	}
 	this->data[modul] = data;
 }
-void HC595::set(const byte *data)
+void HC595::set(byte *data)
 {
-	for(byte a=0; a<_amount; a++)
+	if(sizeof(data) == _amount)
 	{
-		set(a,data[a]);
+		for(byte a=0; a<_amount; a++)
+		{
+			set(a,data[a]);
+		}
 	}
 }
 void HC595::enable()

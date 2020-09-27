@@ -5,14 +5,14 @@
 	
 	Für 74HC595N
 	
-	Qb		--|--U--|--		VCC 5V
-	Qc		--|		|--		Qa
-	Qd		--|		|--		Serial
-	Qe		--|		|--		!enable
-	Qf		--|		|--		save
-	Qg		--|		|--		clock
-	Qh		--|		|--		reset
-	GND	0V	--|-----|--		SerialOut
+	Qb		--|--U--|--	   VCC 5V
+	Qc		--|     |--	   Qa
+	Qd		--|     |--	   Serial
+	Qe		--|     |--	   !enable
+	Qf		--|     |--	   save
+	Qg		--|     |--	   clock
+	Qh		--|     |--	   reset
+	GND	0V	--|-----|--	   SerialOut
 */
 #ifndef HC595_H
 #define HC595_H
@@ -26,12 +26,12 @@ class HC595
 	HC595(byte enable,byte clk,byte serOut,byte reset,byte save,byte amount);
 	~HC595();
 	void write();
-	void write(byte modul, byte data);
-	void write(byte *data);
-	byte get(byte modul);
+	void write(const byte &modul,const byte &data);
+	void write(const byte *data);
+	byte get(const byte &modul);
 	byte* get();
-    void set(byte modul,byte data);
-	void set(byte *data);
+    void set(const byte &modul,const byte &data);
+	void set(const byte *data);
 	void enable();
 	void disable();
 	void reset();

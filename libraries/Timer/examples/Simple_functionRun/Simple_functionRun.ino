@@ -10,7 +10,6 @@ void setup() {
   Serial.begin(9600); //Setup serial port for debug outputs
   timer.onFinished(timerFinishdFunction); //Set the "void timerFinishdFunction()" as function when timer finishes
   timer.start(1000); //Start the timer with 1000ms 
-  timer.autoRestart(true);  //Restart timer automaticly after timer finished
   Serial.println("end of setup");
 }
 

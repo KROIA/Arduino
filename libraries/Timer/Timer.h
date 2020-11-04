@@ -1,6 +1,6 @@
 //	Autor	Alex Krieg
-//	Version	2.3
-//	Datum 	19.06.2018
+//	Version	2.4
+//	Datum 	04.11.2020
 
 #ifndef TIMER_H
 #define TIMER_H

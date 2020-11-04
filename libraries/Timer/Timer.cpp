@@ -7,7 +7,7 @@
 //-------------Public------------------
 Timer::Timer(bool Micros)
 {
-	p_fctTimerEnd = NULL;
+	p_fctTimerEnd = nullptr;
 	doMicros = Micros;
 	_autoRestart = false;
 	this->reset();
@@ -51,9 +51,9 @@ bool Timer::update()
 		{
 			vergangeneZeit	= millis();
 		}
-		if(((vergangeneZeit - startZeit) > benoetigteZeit) && benoetigteZeit != 0)
+		if(((vergangeneZeit - startZeit) >= benoetigteZeit) && benoetigteZeit != 0)
 		{
-			if(p_fctTimerEnd != NULL)
+			if(p_fctTimerEnd != nullptr)
 			{
 				this->stop();
 				(*p_fctTimerEnd)();
